@@ -7,6 +7,7 @@ actual class Platform actual constructor() {
 
     actual fun randomUUID() = UUID.randomUUID().toString()
     actual fun date(): Long {
+
         return Date().time
     }
 }

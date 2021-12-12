@@ -1,14 +1,16 @@
 package com.example.testapp
 
 import com.example.prohappymultiplatform.Platform
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-//@Serializable
+@Serializable
 data class Session(
-  //  @SerialName("id")
+    @SerialName("id")
     var id: String = Platform().randomUUID(),
-   // @SerialName("added_by")
+    @SerialName("added_by")
     val addedBy: String,
-   // @SerialName("problem_id")
+    @SerialName("problem_id")
     val problemID: String)
 {
     var whenAdded: Long = Platform().date()
