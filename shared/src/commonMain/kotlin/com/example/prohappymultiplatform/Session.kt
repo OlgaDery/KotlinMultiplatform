@@ -13,23 +13,33 @@ data class Session(
     @SerialName("problem_id")
     val problemID: String)
 {
+    @SerialName("when_added")
     var whenAdded: Long = Platform().date()
-    var howStrong: Int = 0
+    @SerialName("severity")
+    var severity: Int = 0
+    @SerialName("irrational_conviction_code")
     var irrationalConvictionCode: Int = -1
+    @SerialName("emotion_code")
     var emotionCode = -1
-    var homeworkName: String? = null
-
-    var sessionPatternCode: Int = -1
-    //TODO adding new fields
-
-    var messageToFuture: String? = null
+    @SerialName("critical_condition_confirmed")
     var criticalConditionConfirmed = false
+    @SerialName("dangerous_trigger_confirmed")
     var dangerousTriggerConfirmed = false
-    var externalAbuseConfirmed = false
+    @SerialName("abuse_confirmed")
+    var abuseConfirmed = false
+    @SerialName("own_aggression_confirmed")
     var ownAggressionConfirmed = false
+    @SerialName("significant_person_involved")
     var significantPersonInvolved = false
-    var acceptOwnResponsibility = true
+    @SerialName("accept_responsibility")
+    var acceptResponsibility = true
+    @SerialName("hidden_reason_code")
     var hiddenReasonCode = -1
-    var feelsLikeUnique = false
+    @SerialName("session_pattern_code")
+    var sessionPatternCode: Int = -1
+    @SerialName("homework_name")
+    var homeworkName: String? = null
+    @SerialName("message_to_future")
+    var messageToFuture: String? = null
 
 }

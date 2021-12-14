@@ -1,0 +1,28 @@
+CREATE TABLE Session (
+id TEXT NOT NULL,
+added_by TEXT NOT NULL,
+problem_id TEXT NOT NULL,
+when_added INTEGER AS Int NOT NULL DEFAULT 0,
+severity INTEGER AS Int NOT NULL DEFAULT 0,
+irrational_conviction_code INTEGER AS Int NOT NULL DEFAULT -1,
+emotion_code INTEGER AS Int NOT NULL DEFAULT -1,
+critical_condition_confirmed INTEGER AS Boolean DEFAULT 0,
+dangerous_trigger_confirmed INTEGER AS Boolean DEFAULT 0,
+abuse_confirmed INTEGER AS Boolean DEFAULT 0,
+own_aggression_confirmed INTEGER AS Boolean DEFAULT 0,
+significant_person_involved INTEGER AS Boolean DEFAULT 0,
+accept_responsibility INTEGER AS Boolean DEFAULT 0,
+hidden_reason_code INTEGER AS Int DEFAULT -1,
+session_pattern_code INTEGER AS Int DEFAULT -1,
+homework_name TEXT,
+message_to_future TEXT
+);
+
+insertSession:
+INSERT INTO Session(id, added_by, problem_id, when_added, severity, irrational_conviction_code, emotion_code, critical_condition_confirmed,
+dangerous_trigger_confirmed, abuse_confirmed, own_aggression_confirmed, significant_person_involved, accept_responsibility, hidden_reason_code,
+session_pattern_code, homework_name, message_to_future)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+selectAllSessions:
+SELECT * FROM Session;

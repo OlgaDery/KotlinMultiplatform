@@ -86,8 +86,8 @@ val packForXcode by tasks.creating(Sync::class) {
 
 tasks.getByName("build").dependsOn(packForXcode)
 
-//sqldelight {
-//    database("AppDatabase") {
-//        packageName = "com.example.testapp.shared.cache"
-//    }
-//}
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.example.testapp.shared.cache"
+    }
+}
