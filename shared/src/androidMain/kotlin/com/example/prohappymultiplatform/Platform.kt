@@ -1,5 +1,6 @@
 package com.example.prohappymultiplatform
 
+import kotlinx.coroutines.GlobalScope
 import java.util.*
 
 actual class Platform actual constructor() {
@@ -7,7 +8,6 @@ actual class Platform actual constructor() {
 
     actual fun randomUUID() = UUID.randomUUID().toString()
     actual fun date(): Long {
-
         return Date().time
     }
 }

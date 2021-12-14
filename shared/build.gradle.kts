@@ -3,13 +3,14 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 val coroutinesVersion = "1.5.0-native-mt"
 val serializationVersion = "1.2.2"
 val kotlinVersion = "1.5.21"
+val sqlDelightVersion: String by project
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("kotlin-android-extensions")
     kotlin("plugin.serialization")
-    //id("com.squareup.sqldelight")
+    id("com.squareup.sqldelight")
 }
 
 group = "com.greyhairredbear"
@@ -30,7 +31,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 // implementation ("io.ktor:ktor-client-core:1.5.0")
-                // implementation("com.squareup.sqldelight:runtime:1.4.2")
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
             }
         }
         val commonTest by getting {
@@ -43,7 +44,7 @@ kotlin {
             dependencies {
                 implementation("com.google.android.material:material:1.2.1")
                 // implementation("io.ktor:ktor-client-android:1.5.0")
-                // implementation("com.squareup.sqldelight:android-driver:1.4.2")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
         val androidTest by getting {
@@ -53,7 +54,7 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                // implementation("com.squareup.sqldelight:native-driver:1.4.2")
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
                 // implementation("io.ktor:ktor-client-ios:1.5.0")
             }
         }
