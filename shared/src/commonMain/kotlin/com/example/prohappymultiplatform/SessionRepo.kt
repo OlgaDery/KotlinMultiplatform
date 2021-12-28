@@ -1,9 +1,12 @@
 package com.example.testapp
 
-class SessionRepo(val userRepo: UserRepo) {
+import cache.Database
+import cache.DatabaseDriverFactory
 
+class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverFactory) {
+
+    private val database = Database(databaseDriverFactory)
     var selectedConviction = ""
-    var selectedProtection = ""
     var shouldDecompose = true
     var taskTitle = "My first task title"
     var offenceDetection = -1
@@ -20,61 +23,36 @@ class SessionRepo(val userRepo: UserRepo) {
     init {
         //todo database call here
         session = Session(userRepo.user.id, userRepo.user.id, "")
-    }
-
-//    val weekCode: Int
-//        get(){
-//            return (userRepo.user.weeklyTasks.size-1)
+//        GlobalScope.launch {
+//            withContext(Dispatchers.Default) {
+//                previousSessions.addAll(selectAllSessionsOnAppInit())
+//            }
 //        }
-
-//    private val currentScenarioCodeName: String
-//        get() {
-//            return user.allActiveProblems[0].calculateAssociatedPattern(appContext.resources)
-//        }
-
-    val protectionNames = mutableListOf<Pair<Int, String>>()
-
-    fun addNewProtection(protectionType: Int, trigger: String) {
-        protectionNames.add(Pair(protectionType, trigger))
     }
 
-    fun updateSessionValue() {
-        //todo update in database
+    @Throws(Exception::class) suspend fun selectAllSessionsOnAppInit(): List<Session> {
+        return database.getAllSessions()
     }
 
-    fun calculateProtectionsTrend(): String {
-        val stringBuilder = StringBuilder()
-        if (protectionNames.size == 0) {
-            return "Несмотря на то, что проблема вас беспокоит, вы воспринимаете ее очень адекватно. Вы понимаете свои слабые " +
-                    "стороны и когнитивные ошибки в восприятии ситуации, и готовы меняться."
-        }
-        if (protectionNames.size <= 2) {
-            stringBuilder.append("В целом вы понимаете свою проблему и особенности своей реакции. " +
-                    "Тем не менее, вы держтесь за некоторые ложные представления, что может препятствовать изменениям.").append("\n")
-        } else {
-            stringBuilder.append("Сегодня вы не готовы к изменениям в своем восприятии себя и окружающих и работе над когнитивными ошибками." +
-                    "Не очень продуктивная позиция!.").append("\n")
-        }
-        val protectionsCount = protectionNames.groupingBy { it.first }.eachCount().toMap()
-        protectionNames.forEach {
-
-        }
-
-        try {
-            stringBuilder.append("В ходе упражнения вы использовали следующие типы защит:").append("\n")
-            protectionsCount.forEach{
-                stringBuilder.append(StaticStrings.protectionType[it.key]).append(" - использовалась ").append(it.value).append(" раз").append("\n")
-            }
-        } catch (e: Exception) {}
-
-        return stringBuilder.toString()
+    @Throws(Exception::class) suspend fun saveMessageToFuture(message: String) {
+        return database.updateMessage(message, session.id)
     }
 
-    fun generateDecompositionPatternForDecomposableSession(isDefault: Boolean = false) {
+    @Throws(Exception::class) suspend fun generateDecompositionPatternForDecomposableSession(isDefault: Boolean = false) {
         val value = setUpCurrentSessionDecompositionPattern(isDefault)
         value.apply {
             session.sessionPatternCode = this
-           // activeScenario!!.listOfSessionPatterns.add(this)
+            database.updateSessionCode(this, session.id)
+            userRepo.listOfSessionPatterns.add(this)
+        }
+    }
+
+    @Throws(Exception::class) suspend fun generateSessionCodeAfterInitialScreening() {
+        val value = generateSessionPatternCodeAfterScreening()
+        value.apply {
+            session.sessionPatternCode = this
+            userRepo.listOfSessionPatterns.add(this)
+            database.updateSessionCode(this, session.id)
         }
     }
 
@@ -349,12 +327,8 @@ class SessionRepo(val userRepo: UserRepo) {
            //  here should not be any variations
             dangerousTriggerExists == 1 -> {
                 shouldDecompose = false
-                session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_BAD_TRIGGER_DETECTED_HW
-                userRepo.listOfSessionPatterns.add(session.sessionPatternCode)
-                return session.sessionPatternCode
-
+                return StaticStrings.NO_DECOMPOSIT_BAD_TRIGGER_DETECTED_HW
             }
-
             realSituationExistsValue == 0 -> {
                 shouldDecompose = false
 
@@ -366,262 +340,34 @@ class SessionRepo(val userRepo: UserRepo) {
                     when {
                         !userRepo.listOfSessionPatterns.subList((threshold - 4),
                             (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_3_STORIES) -> {
-
-                            session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_3_STORIES
+                            return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_3_STORIES
 
                         }
                         !userRepo.listOfSessionPatterns.subList((threshold - 4),
                             (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.BASIC_DECOMPOSIT_POTENTIAL_IMPROV) -> {
-
-                            session.sessionPatternCode = StaticStrings.BASIC_DECOMPOSIT_POTENTIAL_IMPROV
+                            return StaticStrings.BASIC_DECOMPOSIT_POTENTIAL_IMPROV
 
                         }
                         !userRepo.listOfSessionPatterns.subList((threshold - 4),
                             (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.DECOMPOSIT_POSITIVE_ASPECTS_OF_SITUATION) -> {
-
-                            session.sessionPatternCode = StaticStrings.DECOMPOSIT_POSITIVE_ASPECTS_OF_SITUATION
+                            return StaticStrings.DECOMPOSIT_POSITIVE_ASPECTS_OF_SITUATION
 
                         }
                         !userRepo.listOfSessionPatterns.subList((threshold - 4),
                             (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS) -> {
-
-                            session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS
+                            return StaticStrings.NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS
                         }
 
                         else -> {
-                            session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
+                            return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
                         }
                     }
                 } else {
-                    session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
+                    return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
                 }
-                userRepo.listOfSessionPatterns.add(session.sessionPatternCode)
-                return session.sessionPatternCode
             }
         }
-        session.sessionPatternCode = StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
-        userRepo.listOfSessionPatterns.add(session.sessionPatternCode)
-        return 5
-    }
-
-//    val homeWorkRecord: HomeWork?
-//        get()
-//        {
-//            try {
-//                if (!newTaskShouldBeGenerated && user.currentWeeklyTask?.whenHomeworkSubmitted != null) {
-//                    return null
-//                }
-//                val homeWork: HomeWork?
-//                val homeWorkDetails: HomeWorkConfig?
-//                var record: ExerciseBaseClass? = null
-//                val indexOfNexthomework = user.weeklyTasks.size - 1//activeScenario!!.listOfSessionPatterns.size
-//
-//                val currentHomework: MutableList<String> = when (user.sortedListOfAccentuations.first().first) {
-//                    StaticStrings.NARCISSIST -> {
-//                        HomeWorkConfig.accessNarcissistTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.NEUROTIC -> {
-//                        HomeWorkConfig.accessNeuroticTask(appContext.resources)
-//                    }
-//                    StaticStrings.MAZOCHIST -> {
-//                        HomeWorkConfig.accessMazohistTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.PASSIVE_AGGRESSIVE -> {
-//                        HomeWorkConfig.accessMazohistTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.DEPRESSIVE -> {
-//                        HomeWorkConfig.accessDepressiveTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.PARANOID -> {
-//                        HomeWorkConfig.accessParanoidTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.SCHIZOID -> {
-//                        HomeWorkConfig.accessSchizoidTreatmentTask(appContext.resources)
-//                    }
-//                    StaticStrings.PSYCHOTIC -> {
-//                        HomeWorkConfig.accessPsychoticTreatmentTask(appContext.resources)
-//                    }
-//                    else -> {
-//                        HomeWorkConfig.accessHystericTreatmentTask(appContext.resources)
-//                    }
-//
-//                }
-//                homeWorkDetails = HomeWorkConfig(
-//                    appContext.resources,
-//                    currentHomework[indexOfNexthomework])
-//                when (homeWorkDetails.className) {
-//
-//                    EmotionForRecord::class.java.canonicalName -> {
-//                        record = EmotionForRecord(createdBy = user.id, problemID = activeScenario!!.id
-//                            , description = homeWorkDetails.homeworkName.plus("")
-//                                .plus(appContext.resources.getStringArray(R.array.emotions_negative)[sessionViewData!!.associatedEmotion ?: 0].toString())
-//                            , stepsToComplete = homeWorkDetails.homeWorkSteps!!.parseIntoString()
-//                            , isHomeWork = true, isCompleted = false)
-//
-//                    }
-//                    RationalConviction::class.java.canonicalName -> {
-//                        record = RationalConviction(createdBy = user.id, problemID = activeScenario!!.id
-//                            , description = homeWorkDetails.homeworkName.plus(": ").plus(sessionViewData!!.badConviction)
-//                            , stepsToComplete = homeWorkDetails.homeWorkSteps!!.parseIntoString()
-//                            , isHomeWork = true, isCompleted = false)
-//
-//                    }
-//                    Flashback::class.java.canonicalName -> {
-//                        record = Flashback(createdBy = user.id, problemID = activeScenario!!.id
-//                            , description = homeWorkDetails.homeworkName
-//                            , stepsToComplete = homeWorkDetails.homeWorkSteps!!.parseIntoString()
-//                            , isHomeWork = true, isCompleted = false)
-//
-//                    }
-//                    Exercise::class.java.canonicalName -> {
-//                        record = Exercise(createdBy = user.id, problemID = activeScenario!!.id
-//                            , description = homeWorkDetails.homeworkName
-//                            , stepsToComplete = homeWorkDetails.homeWorkSteps!!.parseIntoString()
-//                            , isHomeWork = true, isCompleted = false)
-//
-//                    }
-//                }
-//                record?.apply {
-//                    relatedToMythology = homeWorkDetails.symbolicLayerInvolved
-//                }
-//
-//                homeWork = HomeWork(sessionID = sessionViewData!!.session.id, problemID = activeScenario!!.id, addedBy = user.id,
-//                    type = record!!::class.java.canonicalName!!, recordName = record.description, scheduled = true)
-//
-//
-//                homeWork.record = record
-//                System.out.println("homework: " + homeWork.record?.description)
-//                return homeWork
-//
-//            } catch (e: Exception) {
-//                return null
-//            }
-//        }
-//
-//    private fun generateHomeWork(): HomeWork? {
-//        return homeWorkRecord
-//    }
-
-    fun saveHomeWorkRecord() {
-
-        generateSessionPatternCodeAfterScreening()
-//        generateHomeWork()
-//        homeWorkRecord?.apply {
-//            GlobalScope.launch {
-//                activeScenario!!.homeWork = this@apply
-//                //System.out.println("homework: " + activeScenario!!.homeWork.toString())
-//                databaseMethods.insertHomeWork(activeScenario!!.homeWork!!)
-//
-//                user.currentWeeklyTask?.associatedExerciseID = activeScenario!!.homeWork!!.record?.id
-//                user.currentWeeklyTask?.let {
-//                    databaseMethods.updateWeeklyTasks(it)
-//                }
-//
-//                sessionViewData!!.session.homeworkName = activeScenario!!.homeWork!!.record!!.description
-//                calculationCompleted.postValue(sessionViewData!!.session.homeworkName)
-//
-//                databaseMethods.updateSession(sessionViewData!!.session)
-//                when (activeScenario!!.homeWork!!.record) {
-//                    is RationalConviction -> {
-//                        activeScenario!!.rationalConvictions.add(activeScenario!!.homeWork!!.record as RationalConviction)
-//                        user.rationalConvictions.add(record as RationalConviction)
-//                        databaseMethods.insertRationalConviction(activeScenario!!.homeWork!!.record as RationalConviction)
-//                    }
-//
-//                    is Flashback -> {
-//                        activeScenario!!.flashBacks.add(activeScenario!!.homeWork!!.record as Flashback)
-//                        user.flashBacks.add(record as Flashback)
-//                        databaseMethods.insertFlashback(activeScenario!!.homeWork!!.record as Flashback)
-//                    }
-//
-//                    is EmotionForRecord -> {
-//                        activeScenario!!.emotionsForRecords.add(activeScenario!!.homeWork!!.record as EmotionForRecord)
-//                        user.processedEmotions.add(record as EmotionForRecord)
-//                        databaseMethods.insertEmotionRecord(activeScenario!!.homeWork!!.record as EmotionForRecord)
-//                    }
-//
-//                    is Exercise -> {
-//                        activeScenario!!.tasks.add(activeScenario!!.homeWork!!.record as Exercise)
-//                        user.exercises.add(record as Exercise)
-//                        databaseMethods.insertExercise(activeScenario!!.homeWork!!.record as Exercise)
-//                    }
-//                }
-//            }
-//        } ?: run {  }
-    }
-
-    fun updateScenarioSetCompleted() {
-//        val scenario = user.allActiveProblems[0]
-//        scenario.isActive = false
-//        scenario.completedDate = Date()
-//        if (newProfile.email == "email") {
-//            initNewProfile()
-//        }
-//        user.currentWeeklyTask = null
-//        weeklyTaskSetup.value = true
-
-    }
-
-    fun generateStringsForConvictions(): MutableList<String> {
-        val convictions = mutableListOf<String>()
-
-//        when (sessionViewData!!.session.sessionPatternCode) {
-//
-//            StaticStrings.ALTER_HELPLESS_DECOMPOSIT -> {
-//                appContext.resources.getStringArray(R.array.helpless_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_HYSTERIC_DECOMPOSIT -> {
-//                appContext.resources.getStringArray(R.array.hysterical_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_OCD_DECOMPOSIT -> {
-//                appContext.resources.getStringArray(R.array.ocd_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_NARCISS_DECOMPOSIT_THEY_TYPE -> {
-//
-//                appContext.resources.getStringArray(R.array.they_narciss_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_PSYCHOTIC_DECOMPOSIT -> {
-//                appContext.resources.getStringArray(R.array.psychotic_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_NARCISS_DECOMPOSIT_ME_TYPE -> {
-//                appContext.resources.getStringArray(R.array.me_narciss_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.ALTER_NEUROTIC_DECOMPOSIT -> {
-//                appContext.resources.getStringArray(R.array.neurothic_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//
-//            }
-//            StaticStrings.BASIC_DECOMPOSIT_ME_TYPE -> {
-//                appContext.resources.getStringArray(R.array.base_me_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//            }
-//            StaticStrings.BASIC_DECOMPOSIT_THEY_TYPE -> {
-//                appContext.resources.getStringArray(R.array.base_they_decomposition).forEach {
-//                    convictions.add(it)
-//                }
-//            }
-//        }
-        return convictions
+        return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
     }
 
 }

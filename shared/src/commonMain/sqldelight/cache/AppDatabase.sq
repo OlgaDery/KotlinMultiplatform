@@ -1,34 +1,34 @@
 CREATE TABLE Session (
 id TEXT NOT NULL,
-added_by TEXT NOT NULL,
-problem_id TEXT NOT NULL,
-when_added INTEGER AS Int NOT NULL DEFAULT 0,
+addedBy TEXT NOT NULL,
+problemId TEXT NOT NULL,
+whenAdded INTEGER AS Int NOT NULL DEFAULT 0,
 severity INTEGER AS Int NOT NULL DEFAULT 0,
-irrational_conviction_code INTEGER AS Int NOT NULL DEFAULT -1,
-emotion_code INTEGER AS Int NOT NULL DEFAULT -1,
-critical_condition_confirmed INTEGER AS Boolean DEFAULT 0,
-dangerous_trigger_confirmed INTEGER AS Boolean DEFAULT 0,
-abuse_confirmed INTEGER AS Boolean DEFAULT 0,
-own_aggression_confirmed INTEGER AS Boolean DEFAULT 0,
-significant_person_involved INTEGER AS Boolean DEFAULT 0,
-accept_responsibility INTEGER AS Boolean DEFAULT 0,
-hidden_reason_code INTEGER AS Int DEFAULT -1,
-session_pattern_code INTEGER AS Int DEFAULT -1,
-homework_name TEXT,
-message_to_future TEXT
+irrationalConvictionCode INTEGER AS Int NOT NULL DEFAULT -1,
+emotionCode INTEGER AS Int NOT NULL DEFAULT -1,
+criticalConditionConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
+dangerousTriggerConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
+abuseConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
+ownAggressionConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
+significantPersonInvolved INTEGER AS Boolean NOT NULL DEFAULT 0,
+acceptResponsibility INTEGER AS Boolean NOT NULL DEFAULT 0,
+hiddenReasonCode INTEGER AS Int NOT NULL DEFAULT -1,
+sessionPatternCode INTEGER AS Int NOT NULL DEFAULT -1,
+homeworkName TEXT,
+messageToFuture TEXT
 );
 
 insertSession:
-INSERT INTO Session(id, added_by, problem_id, when_added, severity, irrational_conviction_code, emotion_code, critical_condition_confirmed,
-dangerous_trigger_confirmed, abuse_confirmed, own_aggression_confirmed, significant_person_involved, accept_responsibility, hidden_reason_code,
-session_pattern_code, homework_name, message_to_future)
+INSERT INTO Session(id, addedBy, problemId, whenAdded, severity, irrationalConvictionCode, emotionCode, criticalConditionConfirmed,
+dangerousTriggerConfirmed, abuseConfirmed, ownAggressionConfirmed, significantPersonInvolved, acceptResponsibility, hiddenReasonCode,
+sessionPatternCode, homeworkName, messageToFuture)
 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllSessions:
 SELECT * FROM Session;
 
 updateSessionCode:
-UPDATE Session SET session_pattern_code = ? WHERE id = ?;
+UPDATE Session SET sessionPatternCode = ? WHERE id = ?;
 
 updateMessageToFuture:
-UPDATE Session SET message_to_future = ? WHERE id = ?;
+UPDATE Session SET messageToFuture = ? WHERE id = ?;
