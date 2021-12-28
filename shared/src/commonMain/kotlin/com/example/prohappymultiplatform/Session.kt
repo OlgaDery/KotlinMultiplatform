@@ -11,35 +11,33 @@ data class Session(
     @SerialName("added_by")
     val addedBy: String,
     @SerialName("problem_id")
-    val problemID: String)
-{
+    val problemID: String,
     @SerialName("when_added")
-    var whenAdded: Long = Platform().date()
+    var whenAdded: Int = Platform().date().toInt(),
     @SerialName("severity")
-    var severity: Int = 0
+    var severity: Int = 0,
     @SerialName("irrational_conviction_code")
-    var irrationalConvictionCode: Int = -1
+    var irrationalConvictionCode: Int = -1,
     @SerialName("emotion_code")
-    var emotionCode = -1
+    var emotionCode: Int = -1,
     @SerialName("critical_condition_confirmed")
-    var criticalConditionConfirmed = false
+    var criticalConditionConfirmed: Boolean = false,
     @SerialName("dangerous_trigger_confirmed")
-    var dangerousTriggerConfirmed = false
+    var dangerousTriggerConfirmed: Boolean = false,
     @SerialName("abuse_confirmed")
-    var abuseConfirmed = false
+    var abuseConfirmed: Boolean = false,
     @SerialName("own_aggression_confirmed")
-    var ownAggressionConfirmed = false
+    var ownAggressionConfirmed: Boolean = false,
     @SerialName("significant_person_involved")
-    var significantPersonInvolved = false
+    var significantPersonInvolved: Boolean = false,
     @SerialName("accept_responsibility")
-    var acceptResponsibility = true
+    var acceptResponsibility: Boolean = true,
     @SerialName("hidden_reason_code")
-    var hiddenReasonCode = -1
+    var hiddenReasonCode: Int = -1,
     @SerialName("session_pattern_code")
-    var sessionPatternCode: Int = -1
+    var sessionPatternCode: Int = -1,
     @SerialName("homework_name")
-    var homeworkName: String? = null
+    var homeworkName: String? = null,
     @SerialName("message_to_future")
     var messageToFuture: String? = null
-
-}
+)

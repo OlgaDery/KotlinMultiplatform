@@ -26,3 +26,9 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllSessions:
 SELECT * FROM Session;
+
+updateSessionCode:
+UPDATE Session SET session_pattern_code = ? WHERE id = ?;
+
+updateMessageToFuture:
+UPDATE Session SET message_to_future = ? WHERE id = ?;
