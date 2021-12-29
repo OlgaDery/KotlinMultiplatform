@@ -7,19 +7,20 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(databaseDriverFactory.createDriver())
     private val dbQuery = database.appDatabaseQueries
 
-    private fun mapEntryToSession(_id: String, _addedBy: String, _problemID: String, _severity: Int, _whenAdded: Int,
+    private fun mapEntryToSession(_id: String, _addedBy: String, _problemID: String, _whenAdded: Int, _severity: Int,
                                   _irrationalConvictionCode: Int, _emotionCode: Int, _criticalConditionConfirmed: Boolean,
                                   _dangerousTriggerConfirmed: Boolean, _abuseConfirmed: Boolean,
                                   _ownAggressionConfirmed: Boolean, _significantPersonInvolved: Boolean,
                                   _acceptResponsibility: Boolean, _hiddenReasonCode: Int, _sessionPatternCode: Int,
                                   _homeworkName: String?, _messageToFuture: String?): Session {
-        return Session(id = _id, addedBy = _addedBy, problemID = _problemID, severity = _severity,
+
+        return Session(id = _id, addedBy = _addedBy, problemID = _problemID, whenAdded = _whenAdded, severity = _severity,
             irrationalConvictionCode = _irrationalConvictionCode, emotionCode = _emotionCode,
             criticalConditionConfirmed = _criticalConditionConfirmed, dangerousTriggerConfirmed = _dangerousTriggerConfirmed,
             abuseConfirmed = _abuseConfirmed, ownAggressionConfirmed = _ownAggressionConfirmed,
             significantPersonInvolved = _significantPersonInvolved, acceptResponsibility = _acceptResponsibility,
             hiddenReasonCode = _hiddenReasonCode, sessionPatternCode = _sessionPatternCode, homeworkName = _homeworkName,
-            messageToFuture = _messageToFuture, whenAdded = _whenAdded)
+            messageToFuture = _messageToFuture)
     }
 
     private fun insertSession(session: Session) {

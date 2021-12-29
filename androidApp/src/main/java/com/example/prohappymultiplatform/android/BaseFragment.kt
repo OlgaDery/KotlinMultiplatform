@@ -5,55 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import com.example.testapp.NavigationAction
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+open class BaseFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BaseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BaseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_base, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BaseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BaseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun navigate(viewTag: String) {
+        Navigation.findNavController(requireActivity(), R.id.login_nav_host_fragment).apply {
+            when (viewTag) {
+                NavigationAction.StartSession.name -> {
+                    navigate(R.id.home_fragment_to_start_session_fragment)
                 }
+                NavigationAction.FirstScreeningCompleted.name -> {
+                    navigate(R.id.start_session_fragment_to_session_explanation_fragment)
+                }
+                NavigationAction.ExplanationDone.name -> {
+                    navigate(R.id.action_session_explanaition_fragment_to_decomposition)
+                }
+                NavigationAction.ExerciseDone.name -> {
+                    navigate(R.id.action_to_finalize_session_fragment)
+                }
+                NavigationAction.MessageDone.name -> {
+                    //todo need to popup all the fragments
+                    popBackStack(R.id.nav_home, false)
+                }
+
             }
+        }
+
     }
+
 }

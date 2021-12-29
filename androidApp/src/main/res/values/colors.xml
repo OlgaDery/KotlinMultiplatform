@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorOrange">#FF9800</color>
+    <color name="colorDeepRed">#D81B60</color>
+    <color name="colorActive">#F5665B</color>
+    <color name="colorPrimaryDark">#2D09AD</color>
+
+    <color name="colorWhite">#FAFAFA</color>
+    <color name="colorLightBlue">#9FE2EB</color>
+    <color name="colorLightGrey">#BCC7B1</color>
+    <color name="colorBlueComplimentaryToOrange">#6236FF</color>
+    <color name="colorGrey">#6F6B6B</color>
+    <color name="blue">#03A9F4</color>
+
+    <color name="emotions">#2196F3</color>
+    <color name="exercise">#FFEB3B</color>
+    <color name="conviction">#9A72DF</color>
+    <color name="flashback">#EE5C52</color>
+    <color name="goals">#FFC107</color>
+    <color name="optimism">#FF5722</color>
+    <color name="personality_core">#4CAF50</color>
+    <color name="resistance">#00BCD4</color>
+    <color name="mythology">#9C27B0</color>
+    <color name="transparent">#00EDE9ED</color>
+<!--    new colors-->
+
+    <color name="background_light_grey">#F1F1F1</color>
 </resources>

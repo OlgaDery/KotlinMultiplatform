@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <action android:id="@+id/action_global_home"
+        app:popUpTo="@+id/nav_home"
+        app:destination="@id/nav_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.prohappymultiplatform.android.HomeFragment"
+        android:label="Привет!"
+        tools:layout="@layout/fragment_home1" />
+
+    <action
+        android:id="@+id/home_fragment_to_animation_fragment"
+        app:destination="@+id/nav_animation"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <action
+        android:id="@+id/home_fragment_to_start_session_fragment"
+        app:destination="@+id/nav_start_session"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
+        android:id="@+id/nav_start_session"
+        android:name="com.example.prohappymultiplatform.android.SetupSessionFragment"
+        android:label="Сеанс"
+        tools:layout="@layout/fragment_setup_session" />
+
+    <action
+        android:id="@+id/start_session_fragment_to_session_explanation_fragment"
+        app:destination="@+id/nav_explain_session"
+        app:popUpTo="@+id/nav_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
+        android:id="@+id/nav_explain_session"
+        android:name="com.example.prohappymultiplatform.android.SessionExplanationFragment"
+        android:label="Сеанс"
+        tools:layout="@layout/fragment_session_explanation" />
+
+    <action android:id="@+id/action_session_explanaition_fragment_to_decomposition"
+        app:destination="@id/nav_metaph_card"
+        app:popUpTo="@+id/nav_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
+        android:id="@+id/nav_metaph_card"
+        android:name="com.example.prohappymultiplatform.android.MetaphoricCardFragment"
+        android:label="Метафорическая карта"
+        tools:layout="@layout/fragment_metaphoric_card" />
+
+    <action android:id="@+id/action_to_finalize_session_fragment"
+        app:destination="@id/nav_session_final"
+        app:popUpTo="@+id/nav_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
+        android:id="@+id/nav_session_final"
+        android:name="com.example.prohappymultiplatform.android.FinalizeSessionFragment"
+        android:label="Результат"
+        tools:layout="@layout/fragment_finalize_session" />
+
+    <action
+        android:id="@+id/animation_fragment_to_home_fragment"
+        app:destination="@+id/nav_home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+</navigation>

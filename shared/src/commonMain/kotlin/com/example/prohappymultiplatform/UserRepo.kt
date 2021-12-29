@@ -1345,78 +1345,6 @@ class UserRepo(val user: User) {
     }
 
     val listOfSessionPatterns = mutableListOf<Int>()
-
-//    fun findDifferencesInRevisions (newProfile: User): String {
-//
-//        //emotionalDisbalanceLevel - 4
-//        //generalPsycologicalDeviationLevel - 4
-//        //lifeDissatisfactionLevel - 4
-//        //personalImmaturityLevel - 4
-//        //selfEsteemProblemsLevel - 16
-//        if (newProfile.email == "email") {
-//            return ""
-//        }
-//        val builder = StringBuilder()
-//        user.apply {
-//            val emotionalDisbalanceLevelDiff = ((newProfile.utils!!.emotionalDisbalanceLevel.toDouble()/emotionalDisbalanceLevel)*100).roundToInt()
-//            val generalPsycologicalDeviationLevelDiff = ((newProfile.utils!!.generalPsycologicalDeviationLevel.toDouble()/
-//                    generalPsycologicalDeviationLevel)*100).roundToInt()
-//            val lifeDissatisfactionLevelDiff = ((newProfile.utils!!.lifeDissatisfactionLevel.toDouble()/lifeDissatisfactionLevel)*100).roundToInt()
-//            val selfEsteemProblemsLevellDiff = ((newProfile.utils!!.selfEsteemProblemsLevel.toDouble()/selfEsteemProblemsLevel)*100).roundToInt()
-//            val personalImmaturityLevellDiff = ((newProfile.utils!!.personalImmaturityLevel.toDouble()/personalImmaturityLevel)*100).roundToInt()
-//
-//            if (emotionalDisbalanceLevelDiff < 100) {
-//                //dangerous level, blocking the app
-//                builder.append("Эмоциональный баланс - улучшение. Рост фиксируемых показателей на").append("\n")
-//                    .append((100-emotionalDisbalanceLevelDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (emotionalDisbalanceLevelDiff > 100){
-//                builder.append("Эмоциональный баланс - ухудшение. Спад фиксируемых показателей на").append("\n")
-//                    .append((100-emotionalDisbalanceLevelDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (emotionalDisbalanceLevelDiff == 100) {
-//                builder.append("Эмоциональный баланс - без изменений.").append("\n")
-//            }
-//            if (generalPsycologicalDeviationLevelDiff < 100) {
-//                builder.append("Пограничные психические состояния (саморазрушение, склонность к суициду, проявления психоза) - улучшение. " +
-//                        "Рост фиксируемых показателей на").append("\n")
-//                    .append((100-generalPsycologicalDeviationLevelDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (generalPsycologicalDeviationLevelDiff > 100) {
-//                builder.append("Пограничные психические состояния (саморазрушение, склонность к суициду, проявления психоза) - " +
-//                        "ухудшение. Спад фиксируемых показателей на").append("\n")
-//                    .append((100-generalPsycologicalDeviationLevelDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (generalPsycologicalDeviationLevelDiff == 100) {
-//                builder.append("Пограничные психические состояния (саморазрушение, склонность к суициду, проявления психоза) - без изменений.").append("\n")
-//            }
-//            if (lifeDissatisfactionLevelDiff < 100) {
-//                builder.append("Удовлетворенность жизнью - улучшение. Рост фиксируемых показателей на").append("\n")
-//                    .append((100-lifeDissatisfactionLevelDiff).absoluteValue).append(" процентов").append("\n")
-//
-//            } else if (lifeDissatisfactionLevelDiff > 100){
-//                builder.append("Удовлетворенность жизнью - ухудшение. Спад фиксируемых показателей на").append("\n")
-//                    .append((100-lifeDissatisfactionLevelDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (lifeDissatisfactionLevelDiff == 100) {
-//                builder.append("Удовлетворенность жизнью - без изменений.").append("\n")
-//            }
-//
-//            if (selfEsteemProblemsLevellDiff < 100) {
-//                builder.append("Самооценка - улучшение. Рост фиксируемых показателей на").append("\n")
-//                    .append(100-selfEsteemProblemsLevellDiff).append(" процентов").append("\n")
-//            } else if (selfEsteemProblemsLevellDiff > 100){
-//                builder.append("Самооценка - ухудшение. Спад фиксируемых показателей на").append("\n")
-//                    .append((100-selfEsteemProblemsLevellDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (selfEsteemProblemsLevellDiff == 100) {
-//                builder.append("Самооценка - без изменений.").append("\n")
-//            }
-//
-//            if (personalImmaturityLevellDiff < 100 ) {
-//                builder.append("Личностная зрелость - улучшение. Рост фиксируемых показателей на").append("\n")
-//                    .append((100-personalImmaturityLevellDiff).absoluteValue).append(" процентов").append("\n")
-//            } else if (personalImmaturityLevellDiff > 100){
-//                builder.append("Личностная зрелость - ухудшение. Спад фиксируемых показателей на").append("\n")
-//                    .append((100-personalImmaturityLevellDiff).absoluteValue).append(" процентов").append("\n")
-//            }
-//        }
-//        return builder.toString()
-//    }
 }
 
 enum class Emotions (val code: Int) {
@@ -1447,17 +1375,11 @@ enum class Emotions (val code: Int) {
     ANGER(24)//"гнев"
 }
 
-object StaticStrings {
+enum class NavigationAction {
+    StartSession, FirstScreeningCompleted, ExplanationDone, ExerciseDone, MessageDone
+}
 
-    val protectionType = arrayOf(
-        "Регресс",
-        "Рационализация",
-        "Проекция",
-        "Отрицание",
-        "Обесценивание",
-        "Вытеснение",
-        "Замещение"
-    )
+object StaticStrings {
 
     const val BASIC_DECOMPOSIT_ME_TYPE = 0
     const val BASIC_DECOMPOSIT_THEY_TYPE = 1
@@ -1482,29 +1404,13 @@ object StaticStrings {
     const val DEFAULT = 20
     const val NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS = 21
 
-    val decomposable: MutableList<Int> by lazy {
-        mutableListOf<Int>().apply {
-            add(BASIC_DECOMPOSIT_ME_TYPE)
-            add(BASIC_DECOMPOSIT_THEY_TYPE)
-            add(ALTER_NARCISS_DECOMPOSIT_ME_TYPE)
-            add(ALTER_NARCISS_DECOMPOSIT_THEY_TYPE)
-            add(ALTER_NEUROTIC_DECOMPOSIT)
-            add(ALTER_PSYCHOTIC_DECOMPOSIT)
-            add(ALTER_HYSTERIC_DECOMPOSIT)
-            add(ALTER_HELPLESS_DECOMPOSIT)
-            add(ALTER_OCD_DECOMPOSIT)
-        }
-    }
-
     val layoutTypes = arrayListOf("horizontal_swipe", "single_mark_item", "prioretize_profile_aspects")
 
     const val LAYOUT_HORIZONTAL_SWIPE = "horizontal_swipe"
     const val LAYOUT_SINGLE_MARK_ITEM = "single_mark_item"
     const val LAYOUT_PRIORETIZE_PROFILE_ASPECTS = "prioretize_profile_aspects"
     const val LAYOUT_DIARY = "diary"
-
     const val LAYOUT_HOME_PAGER = "layout_home_pager"
-
     const val TAKE_PHOTO_REQUEST_CODE = 101
     const val WRITE_EXTERNAL_REQUEST_CODE = 102
     const val SELECT_PHOTO_REQUEST_CODE = 103
@@ -1533,16 +1439,3 @@ object StaticStrings {
     const val DATE_FORMAT = "dd/MM/yy"
 }
 
-object WeekTypes {
-
-    const val PRIOR_WEEK = "Неделя приоритетов"
-    const val SELF_CONTROL_WEEK = "Неделя cамоконтроля"
-    const val IN_LOVE_WITH_MSLF_WEEK = "Неделя любви к себе"
-    const val WEEK_OF_HABITS = "Неделя привычек"
-    const val NO_STEREOTYPES_WEEK = "Неделя борьбы с шаблонам"
-    const val WEEK_OF_HOPE = "Неделя веры в будушее"
-    const val WEEK_OF_BOUNDARIES = "Неделя границ"
-    const val WEEK_OF_HIDDEN = "Неделя скрытого"
-    const val SPONTANEOUS_WEEK = "Неделя спонтанности"
-    const val WEEK_OF_RESISTANCE = "Неделя устойчивости"
-}

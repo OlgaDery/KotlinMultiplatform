@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AppTheme.HeaderSmallWhite"
+                android:text="@string/current_condition_screening_header" />
+
+            <TextView
+                style="@style/AppTheme.HeaderWithDrawable"
+                android:text="@string/select_severity"
+                app:drawableStartCompat="@drawable/ic_irrational" />
+
+            <Spinner
+                android:id="@+id/severity_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.AppCompat.Spinner.DropDown" />
+
+            <TextView
+                style="@style/AppTheme.HeaderWithDrawable"
+                android:text="@string/select_conviction"
+                app:drawableStartCompat="@drawable/ic_rational" />
+
+            <Spinner
+                android:id="@+id/convictions_spinner"
+                style="@style/Widget.AppCompat.Spinner.DropDown"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/irrational_convictions" />
+
+            <TextView
+                style="@style/AppTheme.HeaderWithDrawable"
+                android:text="@string/select_if_trigger_exists"
+                app:drawableStartCompat="@drawable/ic_situation" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/trigger_existed_chip_group"
+                style="@style/AppTheme.ChipGroupSingleSelection">
+
+                <com.google.android.material.chip.Chip
+                    android:tag="@string/situation_exists_chip"
+                    style="@style/AppTheme.ChoiceChip"
+                    android:text="@string/yes"/>
+
+                <com.google.android.material.chip.Chip
+                    android:tag="@string/situation_exists_chip"
+                    style="@style/AppTheme.ChoiceChip"
+                    android:text="@string/maybe_no"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                style="@style/AppTheme.HeaderWithDrawable"
+                android:textColor="@color/colorActive"
+                android:text="@string/depressive_or_suicidal_mood_detected"
+                app:drawableTint="@color/colorActive"
+                app:drawableStartCompat="@drawable/ic_situation" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/negative_condition_chip_group"
+                style="@style/AppTheme.ChipGroupSingleSelection">
+
+                <com.google.android.material.chip.Chip
+                    android:tag="@string/depressive_suicidal_mood_chip"
+                    style="@style/AppTheme.ChoiceChip"
+                    android:text="@string/yes"/>
+
+                <com.google.android.material.chip.Chip
+                    android:tag="@string/depressive_suicidal_mood_chip"
+                    style="@style/AppTheme.ChoiceChip"
+                    android:text="@string/maybe_no"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/AppTheme.HeaderWithDrawable"
+                    android:textColor="@color/colorActive"
+                    android:text="@string/situation_stress_level"
+                    app:drawableTint="@color/colorActive"
+                    app:drawableStartCompat="@drawable/ic_situation" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/bad_trigger_existed_chip_group"
+                    style="@style/AppTheme.ChipGroupSingleSelection">
+
+                    <com.google.android.material.chip.Chip
+                        android:tag="@string/psycotic_trigger_exists_chip"
+                        style="@style/AppTheme.ChoiceChip"
+                        android:text="@string/yes"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:tag="@string/psycotic_trigger_exists_chip"
+                        style="@style/AppTheme.ChoiceChip"
+                        android:text="@string/maybe_no"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    style="@style/AppTheme.HeaderWithDrawable"
+                    android:textColor="@color/colorActive"
+                    android:text="Относится ли ситуация к прошлому или она случится в будущем?"
+                    app:drawableTint="@color/colorActive"
+                    app:drawableStartCompat="@drawable/ic_situation" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/past_or_future_chip_group"
+                    style="@style/AppTheme.ChipGroupSingleSelection">
+
+                    <com.google.android.material.chip.Chip
+                        android:tag="@string/future_or_past"
+                        style="@style/AppTheme.ChoiceChip"
+                        android:text="@string/past"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:tag="@string/future"
+                        style="@style/AppTheme.ChoiceChip"
+                        android:text="@string/future"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    style="@style/AppTheme.HeaderWithDrawable"
+                    android:textColor="@color/colorActive"
+                    android:text="@string/select_emotion_now"
+                    app:drawableTint="@color/colorActive"
+                    app:drawableStartCompat="@drawable/ic_situation" />
+
+                <Spinner
+                    android:id="@+id/emotion_spinner"
+                    style="@style/Widget.AppCompat.Spinner.DropDown"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/go_to_explanation_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/move_forward"/>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
