@@ -7,27 +7,40 @@
 
 import UIKit
 
-//currently this subclass can be created only manyally, should create a swift class and make it implementing UIViewController
 class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    
+    @IBOutlet weak var scrollViewWithExtraQuestions: UIScrollView!
     @IBOutlet weak var emotionsPicker: UIPickerView!
-    
-    
     @IBOutlet weak var convictionsPicker: UIPickerView!
-    
-    
     @IBOutlet weak var triggerExistsButton: UISegmentedControl!
+    
+    var irrationalConvictionCode: Int = -1
+    var severity: Int = 0
+    var emotionCode: Int = -1
+    var criticalConditionConfirmed = false
+    var dangerousTriggerConfirmed = false
+    var significantPersonInvolved = false
+    var triggerConfirmed = false
+    
+    func displayMoreSessionQuestions() -> Bool {
+        return triggerConfirmed
+    }
     
     @IBAction func onTriggerExistsControlValueChange(_ sender: UISegmentedControl) {
         print(sender.selectedSegmentIndex)
+       // scrollViewWithExtraQuestions.isHidden = false
+        appDelegate.sessionRepo?.session.dangerousTriggerConfirmed = Int32(sender.selectedSegmentIndex) == 1
+        createSession()
     }
+
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
     //Constant. Let may be used as a constant or as a 'val' equivalent in Kotlin
     let convictions = ["Я глупый", "Я ненадежный", "Я бесполезный", "Я уязвимый", "Я беспомощный", "Я брошенный", "Я подавленный", "Я уставший", "Я плохой", "Я никчемный", "Я недооцененный", "Я разочарованный", "Я преданный", "Я омерзительный", "Я отвратительный"]
     
     let emotions = ["не выбрано", "тревога", "страх", "ужас", "разочарование", "сожаление", "обида", "печаль", "тоска", "отчаяние", "смущение", "стыд", "вина", "презрение", "зависть", "отвращение", "пустота", "раздражение", "гнев"]
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -48,28 +61,25 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerView.tag)
+        if (pickerView.tag == 1) {
+            
+            appDelegate.sessionRepo?.session.irrationalConvictionCode = Int32(row)
+            return
+        }
+        appDelegate.sessionRepo?.session.emotionCode = Int32(row)
     }
     
+    func createSession() {
+        appDelegate.sessionRepo?.saveSession(selectedConviction: (appDelegate.sessionRepo?.session.irrationalConvictionCode)!, selectedEmotion: 5, criticalConditionConfirmed: true, severity: 2, triggerExists: true, userResponsible: false, completionHandler: { ktlnUnit, err in
+        })
+    }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+       // super.viewDidLoad
         self.emotionsPicker.delegate = self
         self.emotionsPicker.dataSource = self
         self.convictionsPicker.delegate = self
         self.convictionsPicker.dataSource = self
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-//            self.emotionsPicker.reloadAllComponents()
-//        })
-    
+      //  scrollViewWithExtraQuestions.isHidden = true
     }
-
-    
-    func feelsLikeIamUnigue() {
-        
-    }
-    
-    
 }

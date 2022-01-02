@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var startSessionQuestion: UILabel!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     @IBAction func onButtonClick(_ sender: Any, forEvent event: UIEvent) {
 //        let nextVC = QuestViewController()
 //        //this call allows a transition to the next view controller
@@ -27,8 +29,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        loadSessions()
         startSessionQuestion.text = "Вам плохо?"
+    }
+    
+    func loadSessions() {
+        appDelegate.sessionRepo?.selectAllSessionsOnAppInit(handler: true, completionHandler: { sessions, err in
+            print("found sessions: ")
+            sessions?.forEach{ sess in
+                print(sess)
+                self.appDelegate.sessionRepo?.userRepo.listOfSessionPatterns.add(sess.sessionPatternCode)
+            }
+        })
     }
 
 

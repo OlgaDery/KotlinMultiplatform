@@ -17,6 +17,12 @@ class HomeViewModel: ViewModel(), CoroutineScope {
         if (sessionRepo == null) {
             launch {
                 sessionRepo = SessionRepo(UserRepo(User(1)), DatabaseDriverFactory(context))
+                val sessions = withContext(this.coroutineContext) {
+                    sessionRepo?.selectAllSessionsOnAppInit()
+                }
+                sessions?.let{
+                    sessionRepo?.userRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
+                }
             }
         }
     }

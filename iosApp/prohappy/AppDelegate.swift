@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sessionRepo: SessionRepo? = nil
     
     override init() {
-            sessionRepo = SessionRepo(userRepo: UserRepo(user: user1), databaseDriverFactory: DatabaseDriverFactory())
-        }
-
+        sessionRepo = SessionRepo(userRepo: UserRepo(user: user1), databaseDriverFactory: DatabaseDriverFactory())
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

@@ -14,15 +14,9 @@ class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverF
 
     init {
         session = Session(userRepo.user.id, userRepo.user.id, "")
-        launch {
-            val sessions = withContext(this.coroutineContext) {
-                selectAllSessionsOnAppInit()
-            }
-            userRepo.listOfSessionPatterns.addAll(sessions.map { it.sessionPatternCode })
-        }
     }
 
-    @Throws(Exception::class) private suspend fun selectAllSessionsOnAppInit(): List<Session> {
+    @Throws(Exception::class) suspend fun selectAllSessionsOnAppInit(handler: Boolean = false): List<Session> {
         return database.getAllSessions()
     }
 
