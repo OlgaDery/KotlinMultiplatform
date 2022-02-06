@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        tools:context=".ui.home.FinalizeSessionFragment">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="@style/AppTheme.HeaderBlue"
+            android:text="@string/message_to_future"/>
+
+        <TextView
+            style="@style/AppTheme.MarkedText"
+            android:text="@string/message_to_future_question"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/message_to_future_input_layout"
+            style="@style/AppTheme.ScreeningTextInputLayout"
+            android:imeOptions="actionNext">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message_to_future_edit_text"
+                style="@style/AppTheme.ScreeningEditText"
+                android:drawableStart="@drawable/ic_situation"
+                android:hint="@string/your_input" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/finish_session"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Go to finish"/>
 
-            <TextView
-                style="@style/AppTheme.HeaderBlue"
-                android:text="@string/message_to_future"/>
-
-            <TextView
-                style="@style/AppTheme.MarkedText"
-                android:text="@string/message_to_future_question"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/message_to_future_input_layout"
-                style="@style/AppTheme.ScreeningTextInputLayout"
-                android:imeOptions="actionNext">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/message_to_future_edit_text"
-                    style="@style/AppTheme.ScreeningEditText"
-                    android:drawableStart="@drawable/ic_situation"
-                    android:hint="@string/your_input" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </ScrollView>
-</layout>
+    </LinearLayout>
+</ScrollView>

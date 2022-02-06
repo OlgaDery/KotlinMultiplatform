@@ -3,33 +3,36 @@ package com.example.testapp
 import cache.Database
 import cache.DatabaseDriverFactory
 import kotlinx.coroutines.*
+import java.util.*
+import kotlin.collections.List
 import kotlin.coroutines.CoroutineContext
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
-class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverFactory): CoroutineScope {
+class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope {
 
-    private val database = Database(databaseDriverFactory)
+    private val database = databaseDriverFactory?.let { Database(it) }
     var session: Session
         private set
-    var cardSelected = false
 
     init {
         session = Session(userRepo.user.id, userRepo.user.id, "")
     }
 
     @Throws(Exception::class) suspend fun selectAllSessionsOnAppInit(handler: Boolean = false): List<Session> {
-        return database.getAllSessions()
+        return database?.getAllSessions() ?: mutableListOf()
     }
 
     @Throws(Exception::class) suspend fun saveMessageToFuture(message: String) {
-        return database.updateMessage(message, session.id)
+        database?.updateMessage(message, session.id)
     }
 
     @Throws(Exception::class) suspend fun generateSessionCodeAfterInitialScreening() {
-        val value = generateSessionPatternCodeAfterScreening()
+        val value = generateRandomNumber()
         value.apply {
             session.sessionPatternCode = this
             userRepo.listOfSessionPatterns.add(this)
-            database.updateSessionCode(this, session.id)
+            database?.updateSessionCode(this, session.id)
         }
     }
 
@@ -44,45 +47,32 @@ class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverF
             this.acceptResponsibility = userResponsible
             this.criticalConditionConfirmed = criticalConditionConfirmed
 
-            database.createSession(this)
+            database?.createSession(this)
         }
     }
 
-    private fun generateSessionPatternCodeAfterScreening(): Int {
-        //System.out.println("last session pattern: " + activeScenario!!.listOfSessionPatterns.last())
-        if (userRepo.listOfSessionPatterns.isNotEmpty()) {
-            var threshold = 4
-            if (userRepo.listOfSessionPatterns.size > 3) {
-                threshold = userRepo.listOfSessionPatterns.size
-            }
-            when {
-                !userRepo.listOfSessionPatterns.subList((threshold - 4),
-                    (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_3_STORIES) -> {
-                    return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_3_STORIES
+    fun generateMessageAfterScreening(): String {
+        return ""
+    }
 
-                }
-                !userRepo.listOfSessionPatterns.subList((threshold - 4),
-                    (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.BASIC_DECOMPOSIT_POTENTIAL_IMPROV) -> {
-                    return StaticStrings.BASIC_DECOMPOSIT_POTENTIAL_IMPROV
-
-                }
-                !userRepo.listOfSessionPatterns.subList((threshold - 4),
-                    (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.DECOMPOSIT_POSITIVE_ASPECTS_OF_SITUATION) -> {
-                    return StaticStrings.DECOMPOSIT_POSITIVE_ASPECTS_OF_SITUATION
-
-                }
-                !userRepo.listOfSessionPatterns.subList((threshold - 4),
-                    (userRepo.listOfSessionPatterns.size)).contains(StaticStrings.NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS) -> {
-                    return StaticStrings.NO_DECOMPOSIT_WORK_WITH_EXPECTATIONS
-                }
-
-                else -> {
-                    return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
-                }
-            }
+    fun generateRandomNumber(): Int {
+        var randomNumGenerated = false
+        var randomNum = 0
+        val listToCompareTo = mutableListOf<Int>()
+        if (userRepo.listOfSessionPatterns.size <= 20) {
+            listToCompareTo.addAll(userRepo.listOfSessionPatterns)
         } else {
-            return StaticStrings.NO_DECOMPOSIT_NO_TRIGGER_CARD
+            listToCompareTo.addAll(userRepo.listOfSessionPatterns.subList((userRepo.listOfSessionPatterns.size - 21),
+                (userRepo.listOfSessionPatterns.size-1)))
         }
+        while (!randomNumGenerated) {
+            if (listToCompareTo.contains(randomNum)) {
+                randomNum = nextInt(76)
+            } else {
+                randomNumGenerated = true
+            }
+        }
+        return randomNum
     }
 
     override val coroutineContext: CoroutineContext

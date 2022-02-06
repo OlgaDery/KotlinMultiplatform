@@ -29,7 +29,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Что вы сейчас чувствуете?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62c-xY-Sou">
-                                <rect key="frame" x="20" y="163" width="215" height="21"/>
+                                <rect key="frame" x="20" y="140" width="215" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
@@ -61,22 +61,45 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l47-kr-l9d">
-                                <rect key="frame" x="-114" y="157" width="414" height="162"/>
+                                <rect key="frame" x="-106" y="169" width="414" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0rp-Uf-OID">
+                                <rect key="frame" x="22" y="633" width="213" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Я"/>
+                                    <segment title="Окружающие"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Кто виноват в этом событии?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiH-ga-EcV">
+                                <rect key="frame" x="20" y="592" width="234" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uu8-H0-Quj">
+                                <rect key="frame" x="22" y="687" width="130" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Получить карту"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="amIresponsibleControl" destination="HCS-zb-csV" id="2Du-Vz-re0"/>
                         <outlet property="convictionsPicker" destination="RLh-l5-DcQ" id="lnb-uf-QWH"/>
                         <outlet property="emotionsPicker" destination="l47-kr-l9d" id="zZh-l3-nqI"/>
+                        <outlet property="getCardButton" destination="Uu8-H0-Quj" id="RIZ-b7-EH6"/>
                         <outlet property="triggerExistsButton" destination="HCS-zb-csV" id="lFP-Ay-TK5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="98"/>
+            <point key="canvasLocation" x="131.8840579710145" y="97.767857142857139"/>
         </scene>
     </scenes>
     <resources>

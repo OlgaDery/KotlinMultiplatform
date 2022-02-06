@@ -9,10 +9,11 @@ import UIKit
 
 class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    @IBOutlet weak var scrollViewWithExtraQuestions: UIScrollView!
     @IBOutlet weak var emotionsPicker: UIPickerView!
     @IBOutlet weak var convictionsPicker: UIPickerView!
     @IBOutlet weak var triggerExistsButton: UISegmentedControl!
+    @IBOutlet weak var getCardButton: UIButton!
+    @IBOutlet weak var amIresponsibleControl: UISegmentedControl!
     
     var irrationalConvictionCode: Int = -1
     var severity: Int = 0
@@ -28,7 +29,6 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     @IBAction func onTriggerExistsControlValueChange(_ sender: UISegmentedControl) {
         print(sender.selectedSegmentIndex)
-       // scrollViewWithExtraQuestions.isHidden = false
         appDelegate.sessionRepo?.session.dangerousTriggerConfirmed = Int32(sender.selectedSegmentIndex) == 1
         createSession()
     }
@@ -60,6 +60,7 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         return emotions[row]
     }
     
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (pickerView.tag == 1) {
             
@@ -75,11 +76,10 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
     
     override func viewDidLoad() {
-       // super.viewDidLoad
+      //  super.viewDidLoad
         self.emotionsPicker.delegate = self
         self.emotionsPicker.dataSource = self
         self.convictionsPicker.delegate = self
         self.convictionsPicker.dataSource = self
-      //  scrollViewWithExtraQuestions.isHidden = true
     }
 }
