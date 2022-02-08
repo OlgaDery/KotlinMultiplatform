@@ -80,10 +80,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uu8-H0-Quj">
-                                <rect key="frame" x="22" y="687" width="130" height="31"/>
+                                <rect key="frame" x="22" y="708" width="132" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Получить карту"/>
+                                <connections>
+                                    <action selector="onGetCardButtonClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6fx-7N-3aZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

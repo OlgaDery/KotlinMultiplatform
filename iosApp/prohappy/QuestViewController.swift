@@ -15,6 +15,17 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet weak var getCardButton: UIButton!
     @IBOutlet weak var amIresponsibleControl: UISegmentedControl!
     
+    @IBAction func onGetCardButtonClick(_ sender: UIButton) {
+        appDelegate.sessionRepo?.generateSessionCodeAfterInitialScreening(
+            completionHandler: { data, err in
+                
+            }
+        )
+        
+        let storyboard = UIStoryboard(name: "MetaphoricCardStoryboard", bundle: Bundle.main).instantiateViewController(withIdentifier: "MetaphCardStoryboard") as! MetaphCardViewController
+        self.present(storyboard, animated: true, completion: nil)
+    }
+    
     var irrationalConvictionCode: Int = -1
     var severity: Int = 0
     var emotionCode: Int = -1

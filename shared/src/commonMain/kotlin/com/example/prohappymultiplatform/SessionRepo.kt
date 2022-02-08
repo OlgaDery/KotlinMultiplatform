@@ -3,10 +3,8 @@ package com.example.testapp
 import cache.Database
 import cache.DatabaseDriverFactory
 import kotlinx.coroutines.*
-import java.util.*
 import kotlin.collections.List
 import kotlin.coroutines.CoroutineContext
-import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
 
 class SessionRepo(val userRepo: UserRepo, databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope {
