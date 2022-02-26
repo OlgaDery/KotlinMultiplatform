@@ -22,8 +22,12 @@ class ViewController: UIViewController {
     
     @IBAction func onButtonClick(_ sender: Any, forEvent event: UIEvent) {
 //        //this call allows a transition to the next view controller
-        let storyboard = UIStoryboard(name: "QuestionsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "QuestionsStoryboard") as! QuestViewController
-        self.present(storyboard, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "QuestionsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "QuestionsStoryboard") as! QuestViewController
+       // self.present(storyboard, animated: true, completion: nil)
+        let vc = UIStoryboard(name: "QuestionsStoryboard", bundle: nil)
+        let abc = vc.instantiateViewController(withIdentifier: "QuestionsStoryboard") as? QuestViewController
+        
+        self.navigationController?.pushViewController(abc!, animated: true)
     }
     
     override func viewDidLoad() {

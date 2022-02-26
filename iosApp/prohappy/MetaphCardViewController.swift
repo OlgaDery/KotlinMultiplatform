@@ -9,11 +9,22 @@ import UIKit
 
 class MetaphCardViewController: UIViewController {
     
+    @IBOutlet weak var yourFeelingTextField: UITextField!
+    
+    @IBOutlet weak var yourMessageToFutureTextField: UITextField!
+    
+    @IBOutlet weak var yourDecisionTextField: UITextField!
+    
+    @IBOutlet weak var itemInYourLifeTextField: UITextField!
+    
+    
     @IBAction func onFinishSessionClick(_ sender: Any) {
-        appDelegate.sessionRepo?.saveMessageToFuture(message: "abc", completionHandler: { data, err in
+        
+        //return back to the first screen
+        self.navigationController?.popToRootViewController(animated: true)
+        appDelegate.sessionRepo?.saveMessageToFuture(message: yourMessageToFutureTextField.text ?? "", completionHandler: { data, err in
         
         })
-        //return back to the first screen
     }
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate

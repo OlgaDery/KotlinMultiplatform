@@ -22,8 +22,9 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
             }
         )
         
-        let storyboard = UIStoryboard(name: "MetaphoricCardStoryboard", bundle: Bundle.main).instantiateViewController(withIdentifier: "MetaphCardStoryboard") as! MetaphCardViewController
-        self.present(storyboard, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "MetaphoricCardStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaphCardStoryboard") as! MetaphCardViewController
+      //  self.present(storyboard, animated: true, completion: nil)
+        self.navigationController?.pushViewController(storyboard, animated: true)
     }
     
     var irrationalConvictionCode: Int = -1
