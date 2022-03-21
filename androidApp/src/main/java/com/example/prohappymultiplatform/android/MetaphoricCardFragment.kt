@@ -31,6 +31,11 @@ class MetaphoricCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //metaph_card_header
+        //emotion_of_card
+        //card_connection
+        //card_resolution
+        //card_message
         cardImageView = view.findViewById(R.id.card_image_view)
         nextStepButton = view.findViewById(R.id.go_to_final_step)
         nextStepButton.setOnClickListener {
@@ -45,8 +50,6 @@ class MetaphoricCardFragment : Fragment() {
             val res = requireContext().resources.getIdentifier(
                     "card_".plus(homeViewModel.sessionRepo?.session?.sessionPatternCode.toString()),
                     "raw", requireContext().packageName)
-            System.out.println("resource id generated: " + res + "session id: "
-                    + homeViewModel.sessionRepo?.session?.sessionPatternCode)
             val ims: InputStream = requireContext().resources.openRawResource(res)
             val d = Drawable.createFromStream(ims, null)
             // set image to ImageView

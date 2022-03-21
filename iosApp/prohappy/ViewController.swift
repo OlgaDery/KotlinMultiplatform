@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     func loadSessions() {
         appDelegate.sessionRepo?.selectAllSessionsOnAppInit(handler: true, completionHandler: { sessions, err in
             sessions?.forEach{ sess in
-                self.appDelegate.sessionRepo?.userRepo.listOfSessionPatterns.add(sess.sessionPatternCode)
+                self.appDelegate.sessionRepo?.listOfSessionPatterns.add(sess.sessionPatternCode)
             }
         })
     }

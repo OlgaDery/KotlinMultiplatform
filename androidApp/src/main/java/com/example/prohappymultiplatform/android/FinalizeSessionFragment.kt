@@ -1,13 +1,10 @@
 package com.example.prohappymultiplatform.android
 
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.testapp.NavigationAction
 import com.google.android.material.button.MaterialButton
 
 class FinalizeSessionFragment : BaseFragment() {

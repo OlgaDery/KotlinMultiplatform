@@ -2,29 +2,30 @@ package com.example.prohappymultiplatform.android
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.core.view.get
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import com.example.testapp.NavigationAction
+import com.example.prohappymultiplatform.Constants
+import com.example.prohappymultiplatform.Emotions
+import com.example.prohappymultiplatform.Severity
 
 class SetupSessionFragment : BaseFragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var emotionSpinner: Spinner
     private lateinit var severitySpinner: Spinner
-    private lateinit var convictionsSpinner: Spinner
+    private lateinit var progressBar: ProgressBar
+    private lateinit var emotionHeader: TextView
+    private lateinit var severityHeader: TextView
+    private lateinit var responsibilityHeader: TextView
+    private lateinit var screeningHeader: TextView
+
     private lateinit var goToExplanationButton: com.google.android.material.button.MaterialButton
-    private lateinit var negativeConditionChips: com.google.android.material.chip.ChipGroup
-    private lateinit var triggerExistedChips: com.google.android.material.chip.ChipGroup
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -36,33 +37,40 @@ class SetupSessionFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         severitySpinner = view.findViewById(R.id.severity_spinner)
         emotionSpinner = view.findViewById(R.id.emotion_spinner)
-        convictionsSpinner = view.findViewById(R.id.convictions_spinner)
-        negativeConditionChips = view.findViewById(R.id.negative_condition_chip_group)
-        triggerExistedChips = view.findViewById(R.id.trigger_existed_chip_group)
+        progressBar = view.findViewById(R.id.progress_setup)
+
+        severityHeader = view.findViewById(R.id.severity_header)
+        severityHeader.text = Constants.SELECT_SEVERITY_HEADER
+        emotionHeader = view.findViewById(R.id.emotion_header)
+        emotionHeader.text = Constants.SELECT_EMOTION_HEADER
+        responsibilityHeader = view.findViewById(R.id.responsibility_header)
+        responsibilityHeader.text = Constants.RESPONSIBILITY_HEADER
+        screeningHeader = view.findViewById(R.id.screening_header)
+        screeningHeader.text = Constants.SCREENING_HEADER
 
         goToExplanationButton = view.findViewById(R.id.go_to_explanation_button)
-        goToExplanationButton.setOnClickListener {
-
-            val negativeCondition = negativeConditionChips[0].isSelected
-            val triggerExisted = triggerExistedChips[0].isSelected
-            System.out.println("negative condition selected and trigger existed: " + negativeCondition + triggerExisted)
-
-            homeViewModel.createSession(severity = severitySpinner.selectedItemPosition,
-                selectedConviction = convictionsSpinner.selectedItemPosition,
-                selectedEmotion = emotionSpinner.selectedItemPosition,
-                criticalConditionConfirmed = negativeCondition,
-                triggerExists = triggerExisted, userResponsible = false)
-            navigate(NavigationAction.FirstScreeningCompleted.name)
+        goToExplanationButton.apply {
+            text = Constants.NEXT_PAGE_BUTTON
+            setOnClickListener {
+                homeViewModel.apply {
+                    progressBar.visibility = View.VISIBLE
+                    createSession(severity = severitySpinner.selectedItemPosition,
+                        selectedConviction = 0,
+                        selectedEmotion = emotionSpinner.selectedItemPosition,
+                        criticalConditionConfirmed = false,
+                        triggerExists = false, userResponsible = false)
+                    computeCardCode()
+                    progressBar.visibility = View.GONE
+                    navigate(NavigationAction.FirstScreeningCompleted.name)
+                }
+            }
         }
-
-        convictionsSpinner.adapter = NewArrayAdapter(requireActivity(),
-            R.layout.spinner_item, R.id.spinner_text_view, resources.getStringArray(R.array.irrational_convictions).toMutableList())
+        
         severitySpinner.adapter = NewArrayAdapter(requireActivity(),
-            R.layout.spinner_item, R.id.spinner_text_view, resources.getStringArray(R.array.condition_severity_levels).toMutableList())
+            R.layout.spinner_item, R.id.spinner_text_view, Severity.values().map { it.name }.toMutableList())
         emotionSpinner.adapter = NewArrayAdapter(requireActivity(),
-            R.layout.spinner_item, R.id.spinner_text_view, resources.getStringArray(R.array.emotions_negative).toMutableList())
+            R.layout.spinner_item, R.id.spinner_text_view, Emotions.values().map { it.name }.toMutableList())
     }
-
 }
 
 class NewArrayAdapter(context: Context, resource: Int, val textView: Int, val items: MutableList<String>) : ArrayAdapter<String>(context, resource, textView, items) {

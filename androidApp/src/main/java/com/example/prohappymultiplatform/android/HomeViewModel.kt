@@ -4,24 +4,23 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import cache.DatabaseDriverFactory
 import com.example.testapp.SessionRepo
-import com.example.testapp.User
-import com.example.testapp.UserRepo
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class HomeViewModel: ViewModel(), CoroutineScope {
 
     var sessionRepo: SessionRepo? = null
+        private set
 
     fun initRepo(context: Context) {
         if (sessionRepo == null) {
             launch {
-                sessionRepo = SessionRepo(UserRepo(User(1)), DatabaseDriverFactory(context))
-                val sessions = withContext(this.coroutineContext) {
+                sessionRepo = SessionRepo(DatabaseDriverFactory(context))
+                val sessions = withContext(coroutineContext) {
                     sessionRepo?.selectAllSessionsOnAppInit()
                 }
                 sessions?.let{
-                    sessionRepo?.userRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
+                    sessionRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
                 }
             }
         }
@@ -31,16 +30,20 @@ class HomeViewModel: ViewModel(), CoroutineScope {
                       criticalConditionConfirmed: Boolean, severity: Int,
                       triggerExists: Boolean, userResponsible: Boolean) {
         launch {
-            sessionRepo?.saveSession(
-                selectedConviction, selectedEmotion, criticalConditionConfirmed, severity,
-                triggerExists, userResponsible
-            )
+            withContext(coroutineContext) {
+                sessionRepo?.saveSession(
+                    selectedConviction, selectedEmotion, criticalConditionConfirmed, severity,
+                    triggerExists, userResponsible
+                )
+            }
         }
     }
 
-    fun proceedToExercise() {
+    fun computeCardCode() {
         launch {
-            sessionRepo?.generateSessionCodeAfterInitialScreening()
+            withContext(coroutineContext) {
+                sessionRepo?.generateSessionCodeAfterInitialScreening()
+            }
         }
     }
 

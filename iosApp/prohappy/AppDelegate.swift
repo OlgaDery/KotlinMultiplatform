@@ -11,12 +11,11 @@ import shared
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let user1 = User(revisionID: 1)
     var sessionRepo: SessionRepo? = nil
     var window: UIWindow?
     
     override init() {
-        sessionRepo = SessionRepo(userRepo: UserRepo(user: user1), databaseDriverFactory: DatabaseDriverFactory())
+        sessionRepo = SessionRepo(databaseDriverFactory: DatabaseDriverFactory())
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

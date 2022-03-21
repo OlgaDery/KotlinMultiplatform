@@ -7,17 +7,16 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/header"
+        android:id="@+id/metaph_card_header"
         style="@style/AppTheme.HeaderBlue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/working_with_methaporic_card"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/card_layout_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        app:layout_constraintTop_toBottomOf="@+id/metaph_card_header">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,6 +38,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/emotion_of_card"
                 style="@style/AppTheme.HeaderWithDrawable"
                 android:text="@string/methaporic_card_emotion" />
 
@@ -51,61 +51,24 @@
                 android:entries="@array/emotions_all" />
 
             <TextView
-                style="@style/AppTheme.HeaderWithDrawable"
-                android:text="@string/body_reaction" />
+                android:id="@+id/card_connection"
+                style="@style/AppTheme.HeaderWithDrawable"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/failed_situation_input_layout"
+                android:id="@+id/connection_input_layout"
                 style="@style/AppTheme.ScreeningTextInputLayout"
                 android:imeOptions="actionNext">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/success_factor_edit_text"
+                    android:id="@+id/connection_edit_text"
                     style="@style/AppTheme.ScreeningEditText"
                     android:drawableStart="@drawable/ic_situation"
-                    android:hint="@string/your_input"/>
+                    android:hint="Your text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/card_resolution"
                 style="@style/AppTheme.HeaderWithDrawable"
-                android:text="@string/relevance_to_your_life" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/potential_success_input_layout"
-                style="@style/AppTheme.ScreeningTextInputLayout"
-                android:imeOptions="actionNext">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/potential_success_edit_text"
-                    style="@style/AppTheme.ScreeningEditText"
-                    android:drawableStart="@drawable/ic_situation"
-                    android:hint="@string/your_input" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/AppTheme.HeaderWithDrawable"
-                android:text="@string/how_regular_question" />
-
-            <com.google.android.material.chip.ChipGroup
-                style="@style/AppTheme.ChipGroupSingleSelection">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/AppTheme.ChoiceChip"
-                    android:text="@string/very_often"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/AppTheme.ChoiceChip"
-                    android:text="@string/sometimes"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/AppTheme.ChoiceChip"
-                    android:text="@string/no"/>
-
-            </com.google.android.material.chip.ChipGroup>
-
-            <TextView
-                style="@style/AppTheme.HeaderWithDrawable"
-                android:text="@string/your_today_decision"
                 app:drawableStartCompat="@drawable/ic_situation" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,14 +80,30 @@
                     android:id="@+id/today_resolution_edit_text"
                     style="@style/AppTheme.ScreeningEditText"
                     android:drawableStart="@drawable/ic_situation"
-                    android:hint="@string/your_input" />
+                    android:hint="Your input" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/card_message"
+                style="@style/AppTheme.HeaderWithDrawable"
+                app:drawableStartCompat="@drawable/ic_situation" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/message_input_layout"
+                style="@style/AppTheme.ScreeningTextInputLayout"
+                android:imeOptions="actionNext">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/message_edit_text"
+                    style="@style/AppTheme.ScreeningEditText"
+                    android:drawableStart="@drawable/ic_situation"
+                    android:hint="Your input" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/go_to_final_step"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/move_forward"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

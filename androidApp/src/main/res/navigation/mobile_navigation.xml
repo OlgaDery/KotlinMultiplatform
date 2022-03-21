@@ -41,21 +41,6 @@
         android:label="Сеанс"
         tools:layout="@layout/fragment_setup_session" />
 
-    <action
-        android:id="@+id/start_session_fragment_to_session_explanation_fragment"
-        app:destination="@+id/nav_explain_session"
-        app:popUpTo="@+id/nav_home"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"/>
-
-    <fragment
-        android:id="@+id/nav_explain_session"
-        android:name="com.example.prohappymultiplatform.android.SessionExplanationFragment"
-        android:label="Сеанс"
-        tools:layout="@layout/fragment_session_explanation" />
-
     <action android:id="@+id/action_session_explanaition_fragment_to_decomposition"
         app:destination="@id/nav_metaph_card"
         app:popUpTo="@+id/nav_home"

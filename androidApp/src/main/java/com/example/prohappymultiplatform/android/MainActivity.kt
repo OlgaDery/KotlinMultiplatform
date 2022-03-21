@@ -2,10 +2,7 @@ package com.example.prohappymultiplatform.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.prohappymultiplatform.Greeting
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.example.prohappymultiplatform.Platform
 
 
 class MainActivity : AppCompatActivity() {
