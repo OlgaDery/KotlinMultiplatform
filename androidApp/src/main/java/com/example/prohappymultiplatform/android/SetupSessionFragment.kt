@@ -59,7 +59,6 @@ class SetupSessionFragment : BaseFragment() {
                         selectedEmotion = emotionSpinner.selectedItemPosition,
                         criticalConditionConfirmed = false,
                         triggerExists = false, userResponsible = false)
-                    computeCardCode()
                     progressBar.visibility = View.GONE
                     navigate(NavigationAction.FirstScreeningCompleted.name)
                 }

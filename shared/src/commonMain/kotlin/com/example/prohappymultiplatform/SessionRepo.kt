@@ -22,6 +22,8 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
     }
 
     @Throws(Exception::class) suspend fun selectAllSessionsOnAppInit(handler: Boolean = false): List<Session> {
+        listOfSessionPatterns.addAll(database?.getAllSessions()?.map { it.sessionPatternCode }?: mutableListOf())
+        println("selected: " + database?.getAllSessions()?.size)
         return database?.getAllSessions() ?: mutableListOf()
     }
 
@@ -30,12 +32,7 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
     }
 
     @Throws(Exception::class) suspend fun generateSessionCodeAfterInitialScreening() {
-        val value = generateRandomNumber()
-        value.apply {
-            session.sessionPatternCode = this
-            listOfSessionPatterns.add(this)
-            database?.updateSessionCode(this, session.id)
-        }
+
     }
 
     @Throws(Exception::class) suspend fun saveSession(selectedConviction: Int, selectedEmotion: Int,
@@ -49,13 +46,18 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
             this.acceptResponsibility = userResponsible
             this.criticalConditionConfirmed = criticalConditionConfirmed
 
+            val value = generateRandomNumber()
+            value.apply {
+                session.sessionPatternCode = this
+                listOfSessionPatterns.add(this)
+            }
             database?.createSession(this)
         }
     }
 
     fun generateRandomNumber(): Int {
         var randomNumGenerated = false
-        var randomNum = 0
+        var randomNum = 1
         val listToCompareTo = mutableListOf<Int>()
         if (listOfSessionPatterns.size <= 20) {
             listToCompareTo.addAll(listOfSessionPatterns)
@@ -64,7 +66,7 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
                 (listOfSessionPatterns.size-1)))
         }
         while (!randomNumGenerated) {
-            if (listToCompareTo.contains(randomNum)) {
+            if (listToCompareTo.contains(randomNum) || randomNum == 0) {
                 randomNum = nextInt(numberOfCards)
             } else {
                 randomNumGenerated = true

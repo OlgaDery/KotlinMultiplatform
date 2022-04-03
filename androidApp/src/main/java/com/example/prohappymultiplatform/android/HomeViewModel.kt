@@ -19,9 +19,9 @@ class HomeViewModel: ViewModel(), CoroutineScope {
                 val sessions = withContext(coroutineContext) {
                     sessionRepo?.selectAllSessionsOnAppInit()
                 }
-                sessions?.let{
-                    sessionRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
-                }
+//                sessions?.let{
+//                    sessionRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
+//                }
             }
         }
     }
@@ -39,13 +39,13 @@ class HomeViewModel: ViewModel(), CoroutineScope {
         }
     }
 
-    fun computeCardCode() {
-        launch {
-            withContext(coroutineContext) {
-                sessionRepo?.generateSessionCodeAfterInitialScreening()
-            }
-        }
-    }
+//    fun computeCardCode() {
+//        launch {
+//            withContext(coroutineContext) {
+//                sessionRepo?.generateSessionCodeAfterInitialScreening()
+//            }
+//        }
+//    }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO
