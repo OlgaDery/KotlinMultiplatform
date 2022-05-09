@@ -21,10 +21,15 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
         session = Session(addedBy = "someone", problemID = "default")
     }
 
-    @Throws(Exception::class) suspend fun selectAllSessionsOnAppInit(handler: Boolean = false): List<Session> {
-        listOfSessionPatterns.addAll(database?.getAllSessions()?.map { it.sessionPatternCode }?: mutableListOf())
-        println("selected: " + database?.getAllSessions()?.size)
-        return database?.getAllSessions() ?: mutableListOf()
+    @Throws(Exception::class) suspend fun selectAllSessions(clear: Boolean = false): Int {
+        listOfSessionPatterns.clear()
+        if (clear) {
+            database?.deleteAllRecords()
+        } else {
+            listOfSessionPatterns.addAll(database?.getAllSessions()?.map { it.sessionPatternCode }?: mutableListOf())
+            println("selected: " + database?.getAllSessions()?.size)
+        }
+        return listOfSessionPatterns.size
     }
 
     @Throws(Exception::class) suspend fun saveMessageToFuture(message: String) {

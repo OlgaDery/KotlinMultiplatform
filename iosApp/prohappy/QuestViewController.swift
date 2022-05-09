@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import shared
 
 class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -33,19 +34,18 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     //Constant. Let may be used as a constant or as a 'val' equivalent in Kotlin
     
-    let emotions = ["не выбрано", "тревога", "страх", "ужас", "разочарование", "сожаление", "обида", "печаль", "тоска", "отчаяние", "смущение", "стыд", "вина", "презрение", "зависть", "отвращение", "пустота", "раздражение", "гнев"]
-    
+    let emotions =  Constants.shared.Emotions
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return emotions.count
+        return Int(emotions.size)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return emotions[row]
+        return emotions.get(index: Int32(row)) as String?
     }
     
 

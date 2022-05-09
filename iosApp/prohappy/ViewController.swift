@@ -18,6 +18,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var startSessionQuestion: UILabel!
     
+    @IBAction func onClearSessionClick(_ sender: UIButton) {
+        //clear sessions and reload the view
+        loadSessions(clear: true)
+        
+    }
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func onButtonClick(_ sender: Any, forEvent event: UIEvent) {
@@ -33,14 +39,14 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadSessions()
+        loadSessions(clear: false)
     }
     
-    func loadSessions() {
-        appDelegate.sessionRepo?.selectAllSessionsOnAppInit(handler: true, completionHandler: {
-            sessions, err in
-            let sessionsNum = String(sessions?.count ?? 0)
-            self.startSessionQuestion.text = "Sessions completed: " + sessionsNum
+    func loadSessions(clear: Bool) {
+        appDelegate.sessionRepo?.selectAllSessions(clear: clear, completionHandler: {
+            sess, err in
+            print(sess!)
+            self.startSessionQuestion.text = "Sessions completed: " + "\(sess ?? 0)"
         })
     }
 

@@ -52,4 +52,8 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     internal fun updateMessage(message: String, id: String) {
         dbQuery.updateMessageToFuture(message, id)
     }
+
+    internal fun deleteAllRecords() {
+        dbQuery.deleteRecords()
+    }
 }

@@ -16,12 +16,9 @@ class HomeViewModel: ViewModel(), CoroutineScope {
         if (sessionRepo == null) {
             launch {
                 sessionRepo = SessionRepo(DatabaseDriverFactory(context))
-                val sessions = withContext(coroutineContext) {
-                    sessionRepo?.selectAllSessionsOnAppInit()
+                withContext(coroutineContext) {
+                    sessionRepo?.selectAllSessions(clear = false)
                 }
-//                sessions?.let{
-//                    sessionRepo?.listOfSessionPatterns?.addAll(it.map { it.sessionPatternCode })
-//                }
             }
         }
     }
@@ -38,14 +35,6 @@ class HomeViewModel: ViewModel(), CoroutineScope {
             }
         }
     }
-
-//    fun computeCardCode() {
-//        launch {
-//            withContext(coroutineContext) {
-//                sessionRepo?.generateSessionCodeAfterInitialScreening()
-//            }
-//        }
-//    }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO

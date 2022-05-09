@@ -32,3 +32,6 @@ UPDATE Session SET sessionPatternCode = ? WHERE id = ?;
 
 updateMessageToFuture:
 UPDATE Session SET messageToFuture = ? WHERE id = ?;
+
+deleteRecords:
+DELETE FROM Session;

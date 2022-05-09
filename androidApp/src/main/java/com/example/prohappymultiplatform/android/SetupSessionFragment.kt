@@ -11,8 +11,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.prohappymultiplatform.Constants
-import com.example.prohappymultiplatform.Emotions
-import com.example.prohappymultiplatform.Severity
 
 class SetupSessionFragment : BaseFragment() {
 
@@ -50,7 +48,7 @@ class SetupSessionFragment : BaseFragment() {
 
         goToExplanationButton = view.findViewById(R.id.go_to_explanation_button)
         goToExplanationButton.apply {
-            text = Constants.NEXT_PAGE_BUTTON
+           // text = Constants.NEXT_PAGE_BUTTON
             setOnClickListener {
                 homeViewModel.apply {
                     progressBar.visibility = View.VISIBLE
@@ -66,9 +64,9 @@ class SetupSessionFragment : BaseFragment() {
         }
         
         severitySpinner.adapter = NewArrayAdapter(requireActivity(),
-            R.layout.spinner_item, R.id.spinner_text_view, Severity.values().map { it.name }.toMutableList())
+            R.layout.spinner_item, R.id.spinner_text_view, Constants.Severity.toMutableList())
         emotionSpinner.adapter = NewArrayAdapter(requireActivity(),
-            R.layout.spinner_item, R.id.spinner_text_view, Emotions.values().map { it.name }.toMutableList())
+            R.layout.spinner_item, R.id.spinner_text_view, Constants.Emotions.toMutableList())
     }
 }
 
