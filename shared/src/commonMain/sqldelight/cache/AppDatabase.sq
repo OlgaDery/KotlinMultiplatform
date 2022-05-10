@@ -1,28 +1,18 @@
 CREATE TABLE Session (
 id TEXT NOT NULL,
 addedBy TEXT NOT NULL,
-problemId TEXT NOT NULL,
 whenAdded INTEGER AS Int NOT NULL DEFAULT 0,
 severity INTEGER AS Int NOT NULL DEFAULT 0,
-irrationalConvictionCode INTEGER AS Int NOT NULL DEFAULT -1,
 emotionCode INTEGER AS Int NOT NULL DEFAULT -1,
-criticalConditionConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
-dangerousTriggerConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
-abuseConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
-ownAggressionConfirmed INTEGER AS Boolean NOT NULL DEFAULT 0,
-significantPersonInvolved INTEGER AS Boolean NOT NULL DEFAULT 0,
 acceptResponsibility INTEGER AS Boolean NOT NULL DEFAULT 0,
-hiddenReasonCode INTEGER AS Int NOT NULL DEFAULT -1,
 sessionPatternCode INTEGER AS Int NOT NULL DEFAULT -1,
-homeworkName TEXT,
 messageToFuture TEXT
 );
 
 insertSession:
-INSERT INTO Session(id, addedBy, problemId, whenAdded, severity, irrationalConvictionCode, emotionCode, criticalConditionConfirmed,
-dangerousTriggerConfirmed, abuseConfirmed, ownAggressionConfirmed, significantPersonInvolved, acceptResponsibility, hiddenReasonCode,
-sessionPatternCode, homeworkName, messageToFuture)
-VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO Session(id, addedBy, whenAdded, severity, emotionCode,
+acceptResponsibility, sessionPatternCode, messageToFuture)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllSessions:
 SELECT * FROM Session;

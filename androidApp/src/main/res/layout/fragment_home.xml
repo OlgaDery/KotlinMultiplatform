@@ -15,29 +15,27 @@
             android:layout_height="match_parent"
             android:padding="15dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/start_session_button"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/start_session_chip"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="200dp"
                 style="@style/AppTheme.MarkedText"
-                android:text="Start exercise"
                 android:textSize="30sp"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorOrange"
-                app:drawableStartCompat="@drawable/ic_configure_more" />
+                android:textColor="@color/colorOrange" />
 
-            <ProgressBar
-                android:id="@+id/progress_home"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:backgroundTint="@color/colorActive"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_session_button"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="150dp"
+                app:layout_constraintTop_toBottomOf="@+id/start_session_chip"
+                style="@style/AppTheme.MarkedText"
+                android:textSize="30sp"
+                android:textColor="@color/colorOrange"
+                app:drawableStartCompat="@drawable/ic_configure_more" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

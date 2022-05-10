@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		77829559272E0EC700F00E34 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77829558272E0EC700F00E34 /* Session.swift */; };
 		7787E61D271CAF3F00772E6B /* QuestionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7787E61C271CAF3F00772E6B /* QuestionsStoryboard.storyboard */; settings = {ASSET_TAGS = (QuestionsStoryboard, ); }; };
 		77B9FB1D2714E34500D714A0 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9FB1C2714E34500D714A0 /* QuestViewController.swift */; };
 		77D4EFEC2794B52F002D1246 /* MetaphoricCardStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D4EFEB2794B52F002D1246 /* MetaphoricCardStoryboard.storyboard */; };
@@ -40,7 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		77829558272E0EC700F00E34 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7787E61C271CAF3F00772E6B /* QuestionsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionsStoryboard.storyboard; sourceTree = "<group>"; };
 		77B9FB1C2714E34500D714A0 /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		77D4EFEB2794B52F002D1246 /* MetaphoricCardStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MetaphoricCardStoryboard.storyboard; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				77F7BD76267EB59B00996D19 /* LaunchScreen.storyboard */,
 				77F7BD79267EB59B00996D19 /* Info.plist */,
 				77B9FB1C2714E34500D714A0 /* QuestViewController.swift */,
-				77829558272E0EC700F00E34 /* Session.swift */,
 				77D4EFEF2794B672002D1246 /* MetaphCardViewController.swift */,
 			);
 			path = prohappy;
@@ -301,7 +298,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77829559272E0EC700F00E34 /* Session.swift in Sources */,
 				77F7BD70267EB59900996D19 /* ViewController.swift in Sources */,
 				77B9FB1D2714E34500D714A0 /* QuestViewController.swift in Sources */,
 				77F7BD6C267EB59900996D19 /* AppDelegate.swift in Sources */,

@@ -39,8 +39,7 @@
 
             <TextView
                 android:id="@+id/emotion_of_card"
-                style="@style/AppTheme.HeaderWithDrawable"
-                android:text="@string/methaporic_card_emotion" />
+                style="@style/AppTheme.HeaderWithDrawable"/>
 
             <Spinner
                 android:id="@+id/session_emotion_spinner"
@@ -62,8 +61,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/connection_edit_text"
                     style="@style/AppTheme.ScreeningEditText"
-                    android:drawableStart="@drawable/ic_situation"
-                    android:hint="Your text" />
+                    android:drawableStart="@drawable/ic_situation" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -79,25 +77,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/today_resolution_edit_text"
                     style="@style/AppTheme.ScreeningEditText"
-                    android:drawableStart="@drawable/ic_situation"
-                    android:hint="Your input" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/card_message"
-                style="@style/AppTheme.HeaderWithDrawable"
-                app:drawableStartCompat="@drawable/ic_situation" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/message_input_layout"
-                style="@style/AppTheme.ScreeningTextInputLayout"
-                android:imeOptions="actionNext">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/message_edit_text"
-                    style="@style/AppTheme.ScreeningEditText"
-                    android:drawableStart="@drawable/ic_situation"
-                    android:hint="Your input" />
+                    android:drawableStart="@drawable/ic_situation" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

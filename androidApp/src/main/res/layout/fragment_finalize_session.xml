@@ -12,11 +12,11 @@
 
         <TextView
             style="@style/AppTheme.HeaderBlue"
-            android:text="@string/message_to_future"/>
+            android:text="Finish the session"/>
 
         <TextView
-            style="@style/AppTheme.MarkedText"
-            android:text="@string/message_to_future_question"/>
+            android:id="@+id/message_to_future_question_text"
+            style="@style/AppTheme.MarkedText" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/message_to_future_input_layout"
@@ -26,16 +26,14 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/message_to_future_edit_text"
                 style="@style/AppTheme.ScreeningEditText"
-                android:drawableStart="@drawable/ic_situation"
-                android:hint="@string/your_input" />
+                android:drawableStart="@drawable/ic_situation" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/finish_session"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to finish"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>

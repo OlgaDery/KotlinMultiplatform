@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ScrollView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.prohappymultiplatform.Constants
 import com.google.android.material.button.MaterialButton
 import java.io.IOException
 import java.io.InputStream
@@ -21,7 +20,12 @@ class MetaphoricCardFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     var calculating = false
     private lateinit var cardImageView: ImageView
+    private lateinit var emotion_of_card: TextView
+    private lateinit var card_connection: TextView
+    private lateinit var card_resolution: TextView
+    private lateinit var metaph_card_header: TextView
     private lateinit var nextStepButton: MaterialButton
+    private lateinit var emotionSpinner: Spinner
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -31,16 +35,25 @@ class MetaphoricCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //metaph_card_header
-        //emotion_of_card
-        //card_connection
-        //card_resolution
-        //card_message
+        metaph_card_header = view.findViewById(R.id.metaph_card_header)
+        metaph_card_header.text = Constants.METAPHORIC_CARD_HEADER
+        emotion_of_card = view.findViewById(R.id.emotion_of_card)
+        emotion_of_card.text = Constants.CARD_EMOTION
+        card_connection = view.findViewById(R.id.card_connection)
+        card_connection.text = Constants.CONNECTION_WITH_YOUR_LIFE
+        card_resolution = view.findViewById(R.id.card_resolution)
+        card_resolution.text = Constants.TODAY_RESOLUTION
         cardImageView = view.findViewById(R.id.card_image_view)
         nextStepButton = view.findViewById(R.id.go_to_final_step)
-        nextStepButton.setOnClickListener {
-            finalizeSession()
+        nextStepButton.let {
+            it.text = Constants.NEXT_PAGE_BUTTON
+            it.setOnClickListener {
+                finalizeSession()
+            }
         }
+        emotionSpinner = view.findViewById(R.id.session_emotion_spinner)
+        emotionSpinner.adapter = NewArrayAdapter(requireActivity(),
+            R.layout.spinner_item, R.id.spinner_text_view, Constants.Emotions.toMutableList())
         displayCardBasedOnRandomNumber()
     }
 

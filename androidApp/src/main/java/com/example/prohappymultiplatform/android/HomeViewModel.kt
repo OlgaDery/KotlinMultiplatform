@@ -1,6 +1,7 @@
 package com.example.prohappymultiplatform.android
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cache.DatabaseDriverFactory
 import com.example.testapp.SessionRepo
@@ -12,26 +13,37 @@ class HomeViewModel: ViewModel(), CoroutineScope {
     var sessionRepo: SessionRepo? = null
         private set
 
+    val numberOfSessions = MutableLiveData<Int>(-1)
+
+
     fun initRepo(context: Context) {
         if (sessionRepo == null) {
+            var number: Int?
             launch {
                 sessionRepo = SessionRepo(DatabaseDriverFactory(context))
-                withContext(coroutineContext) {
+                number = withContext(coroutineContext) {
                     sessionRepo?.selectAllSessions(clear = false)
                 }
+                numberOfSessions.postValue(number)
             }
         }
     }
 
-    fun createSession(selectedConviction: Int, selectedEmotion: Int,
-                      criticalConditionConfirmed: Boolean, severity: Int,
-                      triggerExists: Boolean, userResponsible: Boolean) {
+    fun createSession(selectedEmotion: Int, severity: Int, userResponsible: Boolean) {
         launch {
             withContext(coroutineContext) {
                 sessionRepo?.saveSession(
-                    selectedConviction, selectedEmotion, criticalConditionConfirmed, severity,
-                    triggerExists, userResponsible
+                    selectedEmotion, severity, userResponsible
                 )
+                numberOfSessions.postValue(sessionRepo?.listOfSessionPatterns?.size)
+            }
+        }
+    }
+
+    fun saveMessageToFuture(message: String) {
+        launch {
+            withContext(coroutineContext) {
+                sessionRepo?.saveMessageToFuture(message)
             }
         }
     }

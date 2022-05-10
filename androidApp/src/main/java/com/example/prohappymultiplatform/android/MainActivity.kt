@@ -11,6 +11,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.initRepo(this)
     }
 }

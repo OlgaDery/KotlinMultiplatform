@@ -19,7 +19,7 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet weak var getCardButton: UIButton!
     
     @IBAction func onGetCardButtonClick(_ sender: Any) {
-        appDelegate.sessionRepo?.saveSession(selectedConviction: 0, selectedEmotion: 5, criticalConditionConfirmed: true, severity: 2, triggerExists: true, userResponsible: false, completionHandler: { ktlnUnit, err in
+        appDelegate.sessionRepo?.saveSession(selectedEmotion: 5, severity: 2, userResponsible: false, completionHandler: { ktlnUnit, err in
 
             let storyboard = UIStoryboard(name: "MetaphoricCardStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaphCardStoryboard") as! MetaphCardViewController
             self.navigationController?.pushViewController(storyboard, animated: true)
@@ -50,11 +50,6 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if (pickerView.tag == 1) {
-            
-            appDelegate.sessionRepo?.session.irrationalConvictionCode = Int32(row)
-            return
-        }
         appDelegate.sessionRepo?.session.emotionCode = Int32(row)
     }
     

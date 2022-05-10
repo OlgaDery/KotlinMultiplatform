@@ -48,15 +48,13 @@ class SetupSessionFragment : BaseFragment() {
 
         goToExplanationButton = view.findViewById(R.id.go_to_explanation_button)
         goToExplanationButton.apply {
-           // text = Constants.NEXT_PAGE_BUTTON
+            text = Constants.NEXT_PAGE_BUTTON
             setOnClickListener {
                 homeViewModel.apply {
                     progressBar.visibility = View.VISIBLE
                     createSession(severity = severitySpinner.selectedItemPosition,
-                        selectedConviction = 0,
                         selectedEmotion = emotionSpinner.selectedItemPosition,
-                        criticalConditionConfirmed = false,
-                        triggerExists = false, userResponsible = false)
+                        userResponsible = false)
                     progressBar.visibility = View.GONE
                     navigate(NavigationAction.FirstScreeningCompleted.name)
                 }

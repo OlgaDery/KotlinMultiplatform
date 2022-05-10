@@ -18,7 +18,7 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
     val listOfSessionPatterns = mutableListOf<Int>()
 
     init {
-        session = Session(addedBy = "someone", problemID = "default")
+        session = Session(addedBy = "someone")
     }
 
     @Throws(Exception::class) suspend fun selectAllSessions(clear: Boolean = false): Int {
@@ -36,20 +36,12 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
         database?.updateMessage(message, session.id)
     }
 
-    @Throws(Exception::class) suspend fun generateSessionCodeAfterInitialScreening() {
-
-    }
-
-    @Throws(Exception::class) suspend fun saveSession(selectedConviction: Int, selectedEmotion: Int,
-                                                      criticalConditionConfirmed: Boolean, severity: Int,
-                                                      triggerExists: Boolean, userResponsible: Boolean) {
+    @Throws(Exception::class) suspend fun saveSession(selectedEmotion: Int, severity: Int,
+                                                      userResponsible: Boolean) {
         session.apply {
             this.severity = severity
-            this.irrationalConvictionCode = selectedConviction
             this.emotionCode = selectedEmotion
-            this.dangerousTriggerConfirmed = triggerExists
             this.acceptResponsibility = userResponsible
-            this.criticalConditionConfirmed = criticalConditionConfirmed
 
             val value = generateRandomNumber()
             value.apply {
