@@ -34,7 +34,7 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     //Constant. Let may be used as a constant or as a 'val' equivalent in Kotlin
     
-    let emotions =  Constants.shared.Emotions
+    let emotions = Constants.shared.Emotions
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

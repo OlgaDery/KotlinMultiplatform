@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.prohappymultiplatform.Constants
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 
 class HomeFragment : BaseFragment() {
 
     lateinit var homeViewModel: HomeViewModel
-    private lateinit var startSessionButton: com.google.android.material.button.MaterialButton
+    private lateinit var startSessionButton: MaterialButton
     private lateinit var startSessionChip: Chip
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -23,6 +24,10 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         homeViewModel.initRepo(requireContext())
+        val deleteButton: MaterialButton = view.findViewById(R.id.delete_all_button)
+        deleteButton.setOnClickListener {
+            homeViewModel.selectSessions(true)
+        }
 
         startSessionButton = view.findViewById(R.id.start_session_button)
         startSessionChip = view.findViewById(R.id.start_session_chip)

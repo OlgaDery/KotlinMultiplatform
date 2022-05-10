@@ -18,14 +18,19 @@ class HomeViewModel: ViewModel(), CoroutineScope {
 
     fun initRepo(context: Context) {
         if (sessionRepo == null) {
-            var number: Int?
             launch {
                 sessionRepo = SessionRepo(DatabaseDriverFactory(context))
-                number = withContext(coroutineContext) {
-                    sessionRepo?.selectAllSessions(clear = false)
-                }
-                numberOfSessions.postValue(number)
+                selectSessions(false)
             }
+        }
+    }
+
+    fun selectSessions(clear: Boolean) {
+        launch {
+            val number = withContext(coroutineContext) {
+                sessionRepo?.selectAllSessions(clear = clear)
+            }
+            numberOfSessions.postValue(number)
         }
     }
 

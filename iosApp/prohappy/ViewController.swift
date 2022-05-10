@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import shared
 
 class ViewController: UIViewController {
 
     //outlet annotates the variable reference
     //action annotates the function mapped to the UI components
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var sunIcon: UIImageView!
     
@@ -18,13 +21,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var startSessionQuestion: UILabel!
     
-    @IBAction func onClearSessionClick(_ sender: UIButton) {
-        //clear sessions and reload the view
-        loadSessions(clear: true)
-        
-    }
+    @IBOutlet weak var clearSessionsButton: UIButton!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    @IBAction func onClearButtonClick(_ sender: Any) {
+        print("!!!!!!!!!!!!!")
+        loadSessions(clear: true)
+    }
     
     @IBAction func onButtonClick(_ sender: Any, forEvent event: UIEvent) {
         //this call allows a transition to the next view controller
@@ -45,8 +48,8 @@ class ViewController: UIViewController {
     func loadSessions(clear: Bool) {
         appDelegate.sessionRepo?.selectAllSessions(clear: clear, completionHandler: {
             sess, err in
-            print(sess!)
-            self.startSessionQuestion.text = "Sessions completed: " + "\(sess ?? 0)"
+            self.startSessionQuestion.text = Constants.shared.START_SESSION_BUTTON
+            + " "+"\(sess ?? 0)"
         })
     }
 

@@ -28,9 +28,9 @@
                                 <rect key="frame" x="87" y="187" width="240" height="128"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcn-hE-fDR">
-                                <rect key="frame" x="99" y="376" width="228" height="46"/>
+                                <rect key="frame" x="100" y="380" width="236" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="Start new session">
+                                <state key="normal" title="Start session">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
@@ -38,33 +38,33 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bez-hl-LE8">
-                                <rect key="frame" x="99" y="451" width="228" height="46"/>
+                                <rect key="frame" x="137" y="444" width="163" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Clear all sessions">
+                                <state key="normal" title="Clear all">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="onClearSessionClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cpF-G6-hO0"/>
+                                    <action selector="onClearButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9IW-Rx-b9U"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bez-hl-LE8" firstAttribute="top" secondItem="Jcn-hE-fDR" secondAttribute="bottom" constant="29" id="6zm-fo-cbh"/>
+                            <constraint firstItem="bez-hl-LE8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1iv-4M-ipb"/>
                             <constraint firstItem="Jcn-hE-fDR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8u0-e7-39o"/>
                             <constraint firstItem="A21-re-eAA" firstAttribute="firstBaseline" secondItem="bIe-BF-9BL" secondAttribute="baseline" constant="40" id="DKx-A2-azb"/>
+                            <constraint firstItem="bez-hl-LE8" firstAttribute="top" secondItem="A21-re-eAA" secondAttribute="bottom" constant="100" id="hJm-o4-qMv"/>
                             <constraint firstItem="A21-re-eAA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lqD-mA-to8"/>
                             <constraint firstItem="Jcn-hE-fDR" firstAttribute="top" secondItem="A21-re-eAA" secondAttribute="bottom" constant="50" id="r2k-W6-z63"/>
                             <constraint firstItem="bIe-BF-9BL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wQw-rS-WiG"/>
-                            <constraint firstItem="bez-hl-LE8" firstAttribute="firstBaseline" secondItem="Jcn-hE-fDR" secondAttribute="baseline" constant="30" id="xPq-9j-euy"/>
                             <constraint firstItem="bIe-BF-9BL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="xup-kJ-5wQ"/>
-                            <constraint firstItem="bez-hl-LE8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zME-RY-Wcx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lWT-Mu-Lsb"/>
                     <connections>
+                        <outlet property="clearSessionsButton" destination="bez-hl-LE8" id="UaZ-AN-iw0"/>
                         <outlet property="startSessionButton" destination="Jcn-hE-fDR" id="El0-QK-VmR"/>
                         <outlet property="startSessionQuestion" destination="bIe-BF-9BL" id="fwE-Ij-77S"/>
                         <outlet property="sunIcon" destination="A21-re-eAA" id="PIx-8Z-FVS"/>
