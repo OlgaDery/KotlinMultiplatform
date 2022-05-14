@@ -23,8 +23,8 @@
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dW1-B2-gc3">
-                                <rect key="frame" x="48" y="166" width="315" height="226"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dW1-B2-gc3">
+                                <rect key="frame" x="0.0" y="166" width="414" height="226"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What do you feel about this picture?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UHV-r0-bZr">
                                 <rect key="frame" x="48" y="431" width="318" height="34"/>
@@ -52,9 +52,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dW1-B2-gc3" firstAttribute="top" secondItem="bSH-UF-wh2" secondAttribute="bottom" constant="20" id="A1g-XL-4JA"/>
+                            <constraint firstItem="dW1-B2-gc3" firstAttribute="width" secondItem="RDX-z7-ehP" secondAttribute="width" id="M3O-IN-4qb"/>
                             <constraint firstItem="cEN-Wa-8LR" firstAttribute="top" secondItem="UHV-r0-bZr" secondAttribute="bottom" constant="20" id="aHh-eP-qh5"/>
                             <constraint firstItem="UHV-r0-bZr" firstAttribute="top" secondItem="dW1-B2-gc3" secondAttribute="bottom" constant="20" id="all-gO-LJI"/>
+                            <constraint firstItem="UHV-r0-bZr" firstAttribute="width" secondItem="RDX-z7-ehP" secondAttribute="width" id="azO-ae-dAx"/>
                             <constraint firstItem="bSH-UF-wh2" firstAttribute="top" secondItem="RDX-z7-ehP" secondAttribute="top" constant="10" id="cy4-TL-Mal"/>
+                            <constraint firstItem="cEN-Wa-8LR" firstAttribute="width" secondItem="RDX-z7-ehP" secondAttribute="width" id="nSd-fQ-WBB"/>
                             <constraint firstItem="ebb-08-hp1" firstAttribute="top" secondItem="cEN-Wa-8LR" secondAttribute="bottom" constant="20" id="onM-8O-1ZP"/>
                         </constraints>
                     </view>

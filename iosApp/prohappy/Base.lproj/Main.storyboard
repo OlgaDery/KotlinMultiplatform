@@ -27,18 +27,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="sun_ic" translatesAutoresizingMaskIntoConstraints="NO" id="A21-re-eAA">
                                 <rect key="frame" x="87" y="187" width="240" height="128"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcn-hE-fDR">
-                                <rect key="frame" x="100" y="380" width="236" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="Start session">
-                                    <color key="titleColor" systemColor="systemRedColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="onButtonClick:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7FB-al-jZF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bez-hl-LE8">
-                                <rect key="frame" x="137" y="444" width="163" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bez-hl-LE8">
+                                <rect key="frame" x="158.66666666666666" y="620" width="97" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Clear all">
@@ -48,16 +38,26 @@
                                     <action selector="onClearButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9IW-Rx-b9U"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcn-hE-fDR">
+                                <rect key="frame" x="101" y="530" width="236" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Start session">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onButtonClick:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7FB-al-jZF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bez-hl-LE8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1iv-4M-ipb"/>
                             <constraint firstItem="Jcn-hE-fDR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8u0-e7-39o"/>
                             <constraint firstItem="A21-re-eAA" firstAttribute="firstBaseline" secondItem="bIe-BF-9BL" secondAttribute="baseline" constant="40" id="DKx-A2-azb"/>
-                            <constraint firstItem="bez-hl-LE8" firstAttribute="top" secondItem="A21-re-eAA" secondAttribute="bottom" constant="100" id="hJm-o4-qMv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bez-hl-LE8" secondAttribute="bottom" constant="70" id="HVz-BF-udS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jcn-hE-fDR" secondAttribute="bottom" constant="120" id="NDG-3x-wzx"/>
+                            <constraint firstItem="bez-hl-LE8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="SPI-8C-9Ek"/>
                             <constraint firstItem="A21-re-eAA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lqD-mA-to8"/>
-                            <constraint firstItem="Jcn-hE-fDR" firstAttribute="top" secondItem="A21-re-eAA" secondAttribute="bottom" constant="50" id="r2k-W6-z63"/>
                             <constraint firstItem="bIe-BF-9BL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wQw-rS-WiG"/>
                             <constraint firstItem="bIe-BF-9BL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="xup-kJ-5wQ"/>
                         </constraints>

@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func onClearButtonClick(_ sender: Any) {
-        print("!!!!!!!!!!!!!")
         loadSessions(clear: true)
     }
     
