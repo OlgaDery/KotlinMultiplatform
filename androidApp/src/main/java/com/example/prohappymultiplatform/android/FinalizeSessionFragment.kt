@@ -41,7 +41,4 @@ class FinalizeSessionFragment : BaseFragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-    }
 }

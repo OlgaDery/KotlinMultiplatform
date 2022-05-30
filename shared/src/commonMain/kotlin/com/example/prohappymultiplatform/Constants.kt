@@ -3,8 +3,9 @@ package com.example.prohappymultiplatform
 object Constants {
 
     val SCREENING_HEADER = "Please respond the following questions:"
-    val SELECT_MESSAGES_BUTTON = "Messages to future"
     val START_SESSION_BUTTON = "Start session"
+    val SESSIONS_COMPLETED = "Sessions completed: "
+    val CLEAR_ALL_BUTTON = "Clear all session"
     val SELECT_EMOTION_HEADER = "Select emotion"
     val SELECT_SEVERITY_HEADER = "How severe your discomfort is?"
     val RESPONSIBILITY_HEADER = "Was you the person who caused this situation or responsible for it?"

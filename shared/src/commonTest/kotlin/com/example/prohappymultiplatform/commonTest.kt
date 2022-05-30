@@ -1,31 +1,38 @@
 package com.example.prohappymultiplatform
 
 import com.example.testapp.SessionRepo
-import com.example.testapp.User
-import com.example.testapp.UserRepo
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class CommonGreetingTest {
+class SessionRepoTest {
 
     @Test
-    fun testExample() {
-        assertTrue(Greeting().greeting().contains("Hello"), "Check 'Hello' is mentioned")
-    }
-
-    @Test
-    fun testRandomNumberGeneration() {
-        val sessionRepo = SessionRepo(UserRepo(User(1)), null)
-        mutableListOf<Int>().apply {
-            this.add(4)
-            this.add(16)
-            this.add(0)
-            this.add(7)
-            sessionRepo.userRepo.listOfSessionPatterns.addAll(this)
-            assertFalse(this.contains(sessionRepo.generateRandomNumber()))
+    fun test_RandomNumberGeneration_20AndLessItemsInList() {
+        val sessionRepo = SessionRepo(null)
+        var count = 0
+        while (count <= 20) {
+            val randonInt = sessionRepo.generateRandomNumber(sessionRepo.listOfSessionPatterns)
+            assertFalse(sessionRepo.listOfSessionPatterns.contains(randonInt))
+            sessionRepo.listOfSessionPatterns.add(randonInt)
+            count++
         }
-
-
     }
+
+    @Test
+    fun test_RandomNumberGeneration_MoreThan20ItemsInList() {
+        val sessionRepo = SessionRepo(null)
+        var count = 0
+        while (count <= 100) {
+            val randomNum = sessionRepo.generateRandomNumber(sessionRepo.listOfSessionPatterns)
+            if (count > 20) {
+                assertFalse(sessionRepo.listOfSessionPatterns.subList((sessionRepo.listOfSessionPatterns.size - 21),
+                    (sessionRepo.listOfSessionPatterns.size-1)).contains(randomNum))
+
+            }
+            sessionRepo.listOfSessionPatterns.add(randomNum)
+            count++
+        }
+    }
+
 }

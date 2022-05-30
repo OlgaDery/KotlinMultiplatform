@@ -30,10 +30,10 @@ class ViewController: UIViewController {
     
     @IBAction func onButtonClick(_ sender: Any, forEvent event: UIEvent) {
         //this call allows a transition to the next view controller
-        let vc = UIStoryboard(name: "QuestionsStoryboard", bundle: nil)
-        let abc = vc.instantiateViewController(withIdentifier: "QuestionsStoryboard") as? QuestViewController
+        let storyBoard = UIStoryboard(name: "QuestionsStoryboard", bundle: nil)
+        let questViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionsStoryboard") as? QuestViewController
         
-        self.navigationController?.pushViewController(abc!, animated: true)
+        self.navigationController?.pushViewController(questViewController!, animated: true)
     }
     
     override func viewDidLoad() {

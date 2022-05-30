@@ -19,6 +19,7 @@ class QuestViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet weak var getCardButton: UIButton!
     
     @IBAction func onGetCardButtonClick(_ sender: Any) {
+        
         appDelegate.sessionRepo?.saveSession(selectedEmotion: 5, severity: 2, userResponsible: false, completionHandler: { ktlnUnit, err in
 
             let storyboard = UIStoryboard(name: "MetaphoricCardStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaphCardStoryboard") as! MetaphCardViewController

@@ -25,8 +25,11 @@ class HomeFragment : BaseFragment() {
         homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         homeViewModel.initRepo(requireContext())
         val deleteButton: MaterialButton = view.findViewById(R.id.delete_all_button)
-        deleteButton.setOnClickListener {
-            homeViewModel.selectSessions(true)
+        deleteButton.apply {
+            text = Constants.CLEAR_ALL_BUTTON
+            setOnClickListener {
+                homeViewModel.selectSessions(true)
+            }
         }
 
         startSessionButton = view.findViewById(R.id.start_session_button)
@@ -40,7 +43,7 @@ class HomeFragment : BaseFragment() {
         }
 
         homeViewModel.numberOfSessions.observe(viewLifecycleOwner, Observer {
-            startSessionChip.text = it.toString()
+            (Constants.SESSIONS_COMPLETED+it).also { startSessionChip.text = it }
         })
     }
 

@@ -7,7 +7,7 @@ import kotlin.collections.List
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random.Default.nextInt
 
-class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope {
+class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?) {
 
     var numberOfCards = 30
 
@@ -27,7 +27,6 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
             database?.deleteAllRecords()
         } else {
             listOfSessionPatterns.addAll(database?.getAllSessions()?.map { it.sessionPatternCode }?: mutableListOf())
-            println("selected: " + database?.getAllSessions()?.size)
         }
         return listOfSessionPatterns.size
     }
@@ -43,7 +42,7 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
             this.emotionCode = selectedEmotion
             this.acceptResponsibility = userResponsible
 
-            val value = generateRandomNumber()
+            val value = generateRandomNumber(listOfSessionPatterns)
             value.apply {
                 session.sessionPatternCode = this
                 listOfSessionPatterns.add(this)
@@ -52,15 +51,15 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
         }
     }
 
-    fun generateRandomNumber(): Int {
+    fun generateRandomNumber(listOfPatterns: MutableList<Int>): Int {
         var randomNumGenerated = false
         var randomNum = 1
         val listToCompareTo = mutableListOf<Int>()
-        if (listOfSessionPatterns.size <= 20) {
-            listToCompareTo.addAll(listOfSessionPatterns)
+        if (listOfPatterns.size <= 20) {
+            listToCompareTo.addAll(listOfPatterns)
         } else {
-            listToCompareTo.addAll(listOfSessionPatterns.subList((listOfSessionPatterns.size - 21),
-                (listOfSessionPatterns.size-1)))
+            listToCompareTo.addAll(listOfPatterns.subList((listOfPatterns.size - 21),
+                (listOfPatterns.size-1)))
         }
         while (!randomNumGenerated) {
             if (listToCompareTo.contains(randomNum) || randomNum == 0) {
@@ -71,8 +70,5 @@ class SessionRepo(databaseDriverFactory: DatabaseDriverFactory?): CoroutineScope
         }
         return randomNum
     }
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Default
 
 }

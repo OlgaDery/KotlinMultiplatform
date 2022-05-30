@@ -35,7 +35,6 @@ class MetaphCardViewController: UIViewController {
         super.viewDidLoad()
         let stringValue = String(appDelegate.sessionRepo?.session.sessionPatternCode ?? 1)
         let assetName = "card_" + stringValue
-        print("card name: " + assetName)
         cardImageView.image = UIImage(named: assetName)
     }
 }

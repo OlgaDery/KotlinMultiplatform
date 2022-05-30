@@ -18,7 +18,6 @@ open class BaseFragment : Fragment() {
                     navigate(R.id.action_to_finalize_session_fragment)
                 }
                 NavigationAction.MessageDone.name -> {
-                    //todo need to popup all the fragments
                     popBackStack(R.id.nav_home, false)
                 }
 

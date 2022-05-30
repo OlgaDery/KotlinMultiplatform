@@ -30,71 +30,12 @@
         <item name="android:textColor">@color/colorGrey</item>
     </style>
 
-    <style name="AppTheme.EmptyScreenText" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorGrey</item>
-    </style>
-
     <style name="AppTheme.CommonCardView">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardElevation">5dp</item>
         <item name="cardCornerRadius">5dp</item>
-    </style>
-
-    <style name="AppTheme.ButtonToSeeMoreValues" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:backgroundTint">@color/colorActive</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:drawableEnd">@drawable/ic_arrow_drop_up</item>
-        <item name="android:drawableTint" tools:targetApi="m">@color/colorBlueComplimentaryToOrange</item>
-
-    </style>
-
-    <style name="AppTheme.SeeMoreText" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:drawableLeft">@drawable/ic_info</item>
-        <item name="android:drawablePadding">8dp</item>
-        <item name="android:drawableTint" tools:targetApi="m">@color/colorGrey</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:text">Узнать больше</item>
-        <item name="android:textColor">@color/colorGrey</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AppTheme.SeeMoreTextAlternative" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:drawableLeft">@drawable/ic_info</item>
-        <item name="android:drawablePadding">10dp</item>
-        <item name="android:drawableTint" tools:targetApi="m">@color/colorOrange</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/colorOrange</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AppTheme.WebLinkLikeText" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/blue</item>
-        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="AppTheme.HeaderWithDrawable" parent="TextAppearance.MaterialComponents.Body1">
@@ -124,13 +65,6 @@
         <item name="android:layout_marginBottom">16dp</item>
     </style>
 
-    <style name="AppTheme.LayoutInsideCardView">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:padding">16dp</item>
-    </style>
-
     <style name="AppTheme.ScreeningEditText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -140,21 +74,6 @@
 
         <item name="android:drawablePadding">8dp</item>
         <item name="android:drawableTint" tools:targetApi="m">@color/colorOrange</item>
-    </style>
-
-    <style name="AppTheme.AppCompatSeekBar" parent="Widget.AppCompat.SeekBar">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginBottom">12dp</item>
-       <item name="android:progressDrawable">@drawable/ic_color_line_final</item>
-    </style>
-
-    <style name="AppTheme.ExtendedFloatButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="iconTint">@color/colorWhite</item>
     </style>
 
     <style name="AppTheme.ChipGroupSingleSelection" parent="Widget.MaterialComponents.ChipGroup">
@@ -170,8 +89,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 </resources>

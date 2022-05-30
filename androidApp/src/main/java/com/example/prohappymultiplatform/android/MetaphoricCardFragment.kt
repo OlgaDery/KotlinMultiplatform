@@ -20,10 +20,10 @@ class MetaphoricCardFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     var calculating = false
     private lateinit var cardImageView: ImageView
-    private lateinit var emotion_of_card: TextView
-    private lateinit var card_connection: TextView
-    private lateinit var card_resolution: TextView
-    private lateinit var metaph_card_header: TextView
+    private lateinit var emotionOfCard: TextView
+    private lateinit var connection: TextView
+    private lateinit var resolution: TextView
+    private lateinit var cardHeader: TextView
     private lateinit var nextStepButton: MaterialButton
     private lateinit var emotionSpinner: Spinner
 
@@ -35,14 +35,14 @@ class MetaphoricCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        metaph_card_header = view.findViewById(R.id.metaph_card_header)
-        metaph_card_header.text = Constants.METAPHORIC_CARD_HEADER
-        emotion_of_card = view.findViewById(R.id.emotion_of_card)
-        emotion_of_card.text = Constants.CARD_EMOTION
-        card_connection = view.findViewById(R.id.card_connection)
-        card_connection.text = Constants.CONNECTION_WITH_YOUR_LIFE
-        card_resolution = view.findViewById(R.id.card_resolution)
-        card_resolution.text = Constants.TODAY_RESOLUTION
+        cardHeader = view.findViewById(R.id.metaph_card_header)
+        cardHeader.text = Constants.METAPHORIC_CARD_HEADER
+        emotionOfCard = view.findViewById(R.id.emotion_of_card)
+        emotionOfCard.text = Constants.CARD_EMOTION
+        connection = view.findViewById(R.id.card_connection)
+        connection.text = Constants.CONNECTION_WITH_YOUR_LIFE
+        resolution = view.findViewById(R.id.card_resolution)
+        resolution.text = Constants.TODAY_RESOLUTION
         cardImageView = view.findViewById(R.id.card_image_view)
         nextStepButton = view.findViewById(R.id.go_to_final_step)
         nextStepButton.let {
@@ -57,7 +57,7 @@ class MetaphoricCardFragment : Fragment() {
         displayCardBasedOnRandomNumber()
     }
 
-    fun displayCardBasedOnRandomNumber() {
+    private fun displayCardBasedOnRandomNumber() {
         try {
             // get input stream
             val res = requireContext().resources.getIdentifier(
@@ -74,9 +74,9 @@ class MetaphoricCardFragment : Fragment() {
         }
     }
 
-    fun finalizeSession() {
-        Navigation.findNavController(requireActivity(), R.id.login_nav_host_fragment).apply {
-            navigate(R.id.action_to_finalize_session_fragment)
+    private fun finalizeSession() {
+        Navigation.findNavController(requireActivity(), R.id.login_nav_host_fragment)
+            .apply { navigate(R.id.action_to_finalize_session_fragment)
         }
     }
 }
